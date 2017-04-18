@@ -7423,14 +7423,14 @@
 	input SetMotionBlurAmount(float) : "Forces the motion blur effect on the player. Set to < 0 to disable this override."
 ]
 
-@PointClass base(Parentname, Targetname) size(-2 -2 -2, 2 2 2 ) = env_spritetrail : 
+@PointClass base(Parentname, Targetname, RenderFields) size(-2 -2 -2, 2 2 2 ) = env_spritetrail : 
 	"A magical trail you can parent to anything you heart desires."
 [
 	lifetime(float) : "Lifetime" : "0.5"
 	startwidth(float) : "Start Width" : "8.0"
 	endwidth(float) : "End Width" : "1.0"
 	spritename(sprite) : "Sprite Name" : "sprites/bluelaser1.vmt"
-
+	scale(string) : "Scale" : "" : "Scale multiplier of the sprite."
 	renderamt(integer) : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
 
@@ -7440,6 +7440,15 @@
 		4: "Solid"
 		5: "Additive"
 	]
+	
+	// Inputs
+	input ColorRedValue(float) : "Sets the red color channel's value (0 - 255)."
+	input ColorGreenValue(float) : "Sets the green color channel's value (0 - 255)."
+	input ColorBlueValue(float) : "Sets the blue color channel's value (0 - 255)."
+	input SetScale(float) : "Set the sprite's scale (0 - 8.0)."
+	input HideSprite(void) : "Hide the sprite. Won't be drawn until the 'ShowSprite' input is received."
+	input ShowSprite(void) : "Show the sprite."
+	input ToggleSprite(void) : "Toggle the sprite between hidden and shown."
 ]
 
 // lightprop("models/editor/spot.mdl") <---- use this once the orientation is unfucked
@@ -8437,7 +8446,10 @@
 @BaseClass base(Targetname, Angles, Parentname, RenderFields) color(255 255 255) = Weapon
 [
 	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
-	CanBePickedUp(integer) : 1 : "Whether or not the weapon can be picked up"
+	CanBePickedUp(choices) : "Is this weapon allowed to be picked up?" : 1 : "Whether or not the weapon can be picked up"
+	[
+		0 : "No"
+		1 : "Yes"
 	spawnflags(Flags) =
 	[
 		1 : "Start asleep (don't fall to ground)" : 0
