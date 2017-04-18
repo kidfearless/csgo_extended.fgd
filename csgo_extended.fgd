@@ -73,8 +73,9 @@
 //
 //=============================================================================
 
-@mapsize(-16384, 16384)
-
+@mapsize(-16384, 16384)y
+@include "base.fgd"
+@include "csgo.fgd"
 
 //-------------------------------------------------------------------------
 //
@@ -4430,7 +4431,7 @@
 ]
 
 
-@PointClass base(Targetname, Parentname, Angles, Global, Studiomodel, BaseFadeProp) studioprop() = prop_door_rotating : 
+@PointClass base(Targetname, Parentname, Angles, Global, Studiomodel, BaseFadeProp, RenderFields) studioprop() = prop_door_rotating : 
 	"An entity used to place a door in the world."
 [
 	slavename(target_destination) : "Slave Name" : : "The name of any doors that should be slaved to this door (i.e. should open when this one opens, and close when this one closes)."
@@ -4464,7 +4465,6 @@
 	soundunlockedoverride(sound) : "Unlocked Sound" : : "Sound played when the door is unlocked."
 
 	forceclosed(boolean) : "Force Closed" : 0 : "If set, this door will close no matter what. Useful for doors that have to close even if the player tries to block them with objects."
-
 	spawnflags(flags) =
 	[
 		1 : "Starts Open" : 0
@@ -8436,6 +8436,7 @@
 @BaseClass base(Targetname, Angles, Parentname, RenderFields) color(0 0 200) = Weapon
 [
 	// ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
+	CanBePickedUp(integer) : 1 : "Whether or not the weapon can be picked up"
 	spawnflags(Flags) =
 	[
 		1 : "Start asleep (don't fall to ground)" : 0
@@ -8492,7 +8493,7 @@
 @PointClass base(Weapon) studio("models/weapons/w_shot_xm1014_dropped.mdl") = weapon_xm1014 : "XM1014" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_taser.mdl") = weapon_taser : "weapon_taser" []
 @PointClass base(Weapon) studio("models/weapons/w_defuser.mdl") = item_defuser : "Defuse Kit" []
-@PointClass base(Weapon) studio("models/weapons/w_c4.mdl") = weapon_c4 : "C4 Bomb" []
+@PointClass base(Weapon) studio("models/weapons/w_c4_planted.mdl") = weapon_c4 : "C4 Bomb" []
 
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
