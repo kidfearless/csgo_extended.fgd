@@ -2935,6 +2935,7 @@
 		4: "32 (Full)"
 	]
 	master(string) : "Team Master (Obsolete)" : : "Legacy support: The name of a master entity. If the master hasn't been activated, this entity will not activate."	
+	input use(void) : "This allows usage of the game_player_equip"
 	input TriggerForAllPlayers(void) : "This will force all connected players to take the weapon(s) specified."
 	input TriggerForActivatedPlayer(string) : "This will force the player who activated to equip the specified weapon."
 ]
