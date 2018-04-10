@@ -2379,7 +2379,7 @@
 	input SparkOnce(void) : "Spark once."
 ]
 
-@PointClass base(Targetname, Parentname, RenderFields, SystemLevelChoice) size(-2 -2 -2, 2 2 2) sprite() color(20 140 20) = env_sprite : 
+@PointClass base(Targetname, Angles, Parentname, RenderFields, SystemLevelChoice) size(-2 -2 -2, 2 2 2) sprite() color(20 140 20) = env_sprite : 
 	"An entity that controls the drawing of a sprite in the world." 
 [
 	framerate(string) : "Framerate" : "10.0" : "Rate at which the sprite should animate, if at all."
@@ -3214,7 +3214,7 @@
 //
 //-------------------------------------------------------------------------
 
-@PointClass base(Targetname) decal() studio("models/editor/axis_helper_thick.mdl") = infodecal : 
+@PointClass base(Targetname, Origin) decal() studio("models/editor/axis_helper_thick.mdl") = infodecal : 
 	"An entity that places a decal on the world. If the decal has no target name, it will immediately apply itself when the level is loaded. "+
 	"If it has a name specified, it won't apply until it receives the 'Activate' input."
 [
@@ -3300,7 +3300,7 @@
 	target(target_destination) : "Entity to look at" : : "Name of entity that dead players will face while in intermission at this spot."
 ]
 
-@PointClass base(Targetname) iconsprite("editor/info_landmark") = info_landmark : 
+@PointClass base(Targetname) icon("editor/info_landmark") = info_landmark : 
 	"An entity that acts as a landmark for transitions to another level. There should be a corresponding info_landmark entity in the next map. Entities will be transitioned to the next level relative to the info_landmark entities."
 [
 ]
