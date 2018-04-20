@@ -3034,7 +3034,7 @@
 	input Disable(void) : "Stop displaying the message text."
 ]
 
-@PointClass base(Targetname, Parentname, Angles) worldtext() = point_worldtext : 
+@PointClass base(Targetname, Parentname, Angles, RenderFields) worldtext() = point_worldtext : 
 	"An entity that displays a text message oriented in the world, at its origin."
 [
 	spawnflags(flags) =
@@ -3045,6 +3045,11 @@
 	message(string) : "Entity Message"
 	textsize(float) : "Text Size" : 10 : "Text Size."
 	color(color255) : "Color" : "255 255 255"
+	fademindist(float) : "Start Fade Dist/Pixels" : 400 : "Distance at which the text starts to fade."
+	fademaxdist(float) : "End Fade Dist/Pixels" : 1200 : "Maximum distance at which the text is visible."
+	fadescale(float) : "Fade Scale" : 1 : "If you specify a fade in the worldspawn, or if the engine is running under dx7, then the engine will forcibly fade out props even if fademindist/fademaxdist isn't specified." +
+												 " This scale factor gives you some control over the fade. Using 0 here turns off the forcible fades." +
+												 " Numbers smaller than 1 cause the text to fade out at further distances, and greater than 1 cause it to fade out at closer distances."
 
 	// Inputs
 	input Enable(void) : "Start displaying the message text, if the player is within the message radius."
@@ -9063,7 +9068,7 @@
 	input Disable(void) : "Make text invisible."
 
 	input SetDisplayText(string) : "Sets the display text."
-
+]
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////End of csgo.fgd////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
