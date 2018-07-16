@@ -174,6 +174,11 @@
 	input RunScriptFile(script) : "Execute a game script file from disk"
 	input RunScriptCode(string) : "Execute a string of script source code"
 	
+
+	// Pre-defined contexts at server startup time (set by mapper)
+	ResponseContext(string) : "Response Contexts" : "" : "Response system context(s) for this entity. Format should be: 'key:value,key2:value2,etc'. When this entity speaks, the list of keys & values will be passed to the response rules system."
+
+	
 	// Inputs
 	input Kill(void) : "Removes this entity from the world."
 	input KillHierarchy(void) : "Removes this entity and all its children from the world."
@@ -182,6 +187,10 @@
 	input FireUser2(void) : "Causes this entity's OnUser2 output to be fired."
 	input FireUser3(void) : "Causes this entity's OnUser3 output to be fired."
 	input FireUser4(void) : "Causes this entity's OnUser4 output to be fired."
+
+	input AddContext(string) : "Adds a context to this entity's list of response contexts. The format should be 'key:value'."
+	input RemoveContext(string) : "Remove a context from this entity's list of response contexts. The name should match the 'key' of a previously added context."
+	input ClearContext(void) : "Removes all contexts in this entity's list of response contexts."
 
 	// Outputs	
 	output OnUser1(void) : "Fired in response to FireUser1 input."
@@ -399,13 +408,6 @@
 
 @BaseClass = ResponseContext
 [
-	// Inputs
-	input AddContext(string) : "Adds a context to this entity's list of response contexts. The format should be 'key:value'."
-	input RemoveContext(string) : "Remove a context from this entity's list of response contexts. The name should match the 'key' of a previously added context."
-	input ClearContext(void) : "Removes all contexts in this entity's list of response contexts."
-
-	// Pre-defined contexts at server startup time (set by mapper)
-	ResponseContext(string) : "Response Contexts" : "" : "Response system context(s) for this entity. Format should be: 'key:value,key2:value2,etc'. When this entity speaks, the list of keys & values will be passed to the response rules system."
 ]
 
 @BaseClass base(Targetname, DamageFilter, Shadow, Reflection, RenderFields) = Breakable
@@ -3938,7 +3940,7 @@
 	output OnFullyClosed(void) : "Fired when the water brush reaches the starting position."
 ]
 
-@SolidClass base(Targetname, Parentname, Origin, Angles, RenderFields, Shadow, ToggleDraw, Reflection) = func_rotating : 
+@SolidClass base(Targetname, Parentname, Origin, Angles, RenderFields, Shadow, Reflection) = func_rotating : 
 	"A rotating brush entity."
 [
 	maxspeed(integer) : "Max Rotation Speed" : 100 : "The maximum rotation speed of the brushes, in degrees per second."
