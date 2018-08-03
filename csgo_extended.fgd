@@ -5729,7 +5729,7 @@
 //
 //-------------------------------------------------------------------------
 
-@SolidClass base(BreakableBrush,Targetname, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
+@SolidClass base(BreakableBrush, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
 	"A brush entity that's physically simulated."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -5876,7 +5876,7 @@
 	output OnAwakened(void) : "Fired when this entity becomes awake (collision/force is applied)."
 ]
 
-@SolidClass base(BreakableBrush,Targetname, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
+@SolidClass base(BreakableBrush, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
 	"A pushable brush object with very primitive physics."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
