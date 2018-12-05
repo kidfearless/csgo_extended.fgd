@@ -2761,54 +2761,14 @@
 	]
 
 // Equipment
-	weapon_hegrenade (choices) : "Give HE Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_flashbang (choices) : "Give Flashbang Grenade" : "" = 
-	[
-		"": "No"
-		1: "1"
-		2: "2"
-	]
-
-	weapon_smokegrenade (choices) : "Give Smoke Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_tagrenade (choices) : "Give Tactical Awareness Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_healthshot (choices) : "Give Healthshot" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-	
-	weapon_decoy (choices) : "Give Decoy Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_molotov (choices) : "Give Molotov Cocktail" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-	
-	weapon_incgrenade (choices) : "Give Incendiary Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
+	weapon_hegrenade (float) : "Give # HE Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_flashbang (float) : "Give # Flashbang Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_smokegrenade (float) : "Give # Smoke Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_tagrenade (float) : "Give # Tactical Awareness Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_healthshot (float) : "Give # Healthshot" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_decoy (float) : "Give # Decoy Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_molotov (float) : "Give # Molotov Cocktail" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_incgrenade (float) : "Give # Incendiary Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	
 	weapon_taser (choices) : "Give Taser" : "" = 
 	[
