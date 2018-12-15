@@ -2770,7 +2770,7 @@
 	weapon_molotov (float) : "Give # Molotov Cocktail" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_incgrenade (float) : "Give # Incendiary Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	
-	weapon_taser (choices) : "Give Taser" : "" = 
+	weapon_taser (choices) : "Give Taser" : "" =
 	[
 		"": "No"
 		1: "Yes"
@@ -2812,95 +2812,6 @@
 		1: "Yes"
 	]
 
-//AMMO
-	ammo_338mag (choices) : "Give .338 Magnum Ammo" : "" : "Weapons that use this ammo: Awp" =
-	[
-		"": "No"
-		1: "10"
-		2: "20"
-		3: "30 (Full)"
-	]
-
-	ammo_357sig (choices) : "Give .357 Ammo" : "" : "Weapons that use this ammo: P250, P2000" =
-	[
-		"": "No"
-		1: "13"
-		2: "26"
-		3: "39"
-		4: "52 (Full)"
-	]
-
-	ammo_45acp (choices) : "Give .45 Ammo" : "" : "Weapons that use this ammo:USP-Silencer, Mac-10, UMP45" =
-	[
-		"": "No"
-		1: "25"
-		2: "50"
-		3: "75"
-		4: "100 (Full)"
-	]
-
-	ammo_50AE (choices) : "Give .50 Ammo" : "" : "Weapons that use this ammo: Desert Eagle, R8-Revolver" =
-	[
-		"": "No"
-		1: "7"
-		2: "14"
-		3: "21"
-		4: "28"
-		5: "35 (Full)"
-	]
-
-	ammo_556mm_box (choices) : "Give 5.56 Ammo Box" : "" : "Weapons that use this ammo: M249, M4a4, M4a1-Silencer, SG-556, Galil, Famas, Aug, Negev" =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90"
-		4: "120"
-		5: "150"
-		6: "180"
-		7: "200 (Full)"
-	]
-
-	ammo_556mm (choices) : "Give 5.56 Ammo" : "" : "Weapons that use this ammo: M249, M4a4, M4a1-Silencer, SG-556, Galil, Famas, Aug, Negev" =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90 (Full)"
-	]
-
-	ammo_57mm (choices) : "Give 5.7 x 28mm Ammo" : "" : "Weapons that use this ammo: P90, Five-Seven" =
-	[
-		"": "No"
-		1: "50"
-		2: "100 (Full)"
-	]
-
-	ammo_762mm (choices) : "Give 7.62 NATO Ammo" : "" : "Weapons that use this ammo: Most of them." =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90 (Full)"
-	]
-
-	ammo_9mm (choices) : "Give 9mm Ammo" : "" : "Weapons that use this ammo: Glock, Elites, Tec-9, MP9, MP7, PP-Bizon, CZ-75-Auto" =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90"
-		4: "120 (Full)"
-	]
-
-	ammo_buckshot (choices) : "Give 12 Gauge Ammo" : "" : "Weapons that use this ammo: Auto Shotgun, Nova, Mag7, Sawed-Off" =
-	[
-		"": "No"
-		1: "8"
-		2: "16"
-		3: "24"
-		4: "32 (Full)"
-	]
 	master(string) : "Team Master (Obsolete)" : : "Legacy support: The name of a master entity. If the master hasn't been activated, this entity will not activate."	
 	input use(void) : "This allows usage of the game_player_equip"
 	input TriggerForAllPlayers(void) : "This will force all connected players to take the weapon(s) specified."
@@ -3900,7 +3811,7 @@
 	output OnFullyClosed(void) : "Fired when the water brush reaches the starting position."
 ]
 
-@SolidClass base(Targetname, Parentname, Origin, Angles, RenderFields, Shadow, Reflection) = func_rotating : 
+@SolidClass base(Targetname, Parentname, Origin, Angles, RenderFields, Shadow, ToggleDraw, Reflection) = func_rotating : 
 	"A rotating brush entity."
 [
 	maxspeed(integer) : "Max Rotation Speed" : 100 : "The maximum rotation speed of the brushes, in degrees per second."
@@ -5689,7 +5600,7 @@
 //
 //-------------------------------------------------------------------------
 
-@SolidClass base(BreakableBrush, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
+@SolidClass base(BreakableBrush, Targetname, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
 	"A brush entity that's physically simulated."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -5836,7 +5747,7 @@
 	output OnAwakened(void) : "Fired when this entity becomes awake (collision/force is applied)."
 ]
 
-@SolidClass base(BreakableBrush, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
+@SolidClass base(BreakableBrush, Targetname, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
 	"A pushable brush object with very primitive physics."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -8061,8 +7972,9 @@
 	input SetTeam(integer) : "Changes the entity's team"
 ]
 
-@BaseClass color(255 255 255) base(Targetname, RenderFields, Angles) = Weapon
+@BaseClass color(0 0 200) base(Targetname, RenderFields, Angles) = Weapon
 [
+	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
 	spawnflags(Flags) =
 	[
 		1 : "Start constrained" : 0
@@ -8071,6 +7983,13 @@
 
 	output OnPlayerUse(void) : "Fires when the player +uses this weapon"
 	output OnPlayerPickup(void) : "Fires when the player picks up this weapon"
+	output OnIgnite(void) : "Fired when the weapon catches fire."
+	//output OnNPCPickup(void) : "Fired when an NPC picks up the weapon."
+	
+	input SetReserveAmmoAmount(integer) : "Set the reserve ammo on this weapon"
+	input SetAmmoAmount(integer) : "Set the ammo on this weapon"
+	input ToggleCanBePickedUp(void) : "Toggle CanBePickedUp"
+	input Ignite(void) : "Sets the weapon afire."
 ]
 
 @FilterClass base(BaseFilter) size(-8 -8 -8, 8 8 8) = filter_activator_team :
@@ -8473,24 +8392,6 @@
 // Weapons
 //
 //-------------------------------------------------------------------------
-@BaseClass base(Targetname, Angles, Parentname, RenderFields) color(255 255 255) = Weapon
-[
-	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
-	spawnflags(Flags) =
-	[
-		1 : "Start constrained" : 0
-	]
-	CanBePickedUp(boolean) : "Is this weapon allowed to be picked up?" : 1
-
-
-	output OnPlayerUse(void) : "Fired when the player +USEs the weapon."
-	output OnPlayerPickup(void) : "Fires when the player picks up this weapon"
-	output OnIgnite(void) : "Fired when the weapon catches fire."
-	// output OnNPCPickup(void) : "Fired when an NPC picks up the weapon."
-
-	input Ignite(void) : "Sets the weapon afire."
-]
-
 
 @PointClass base(Weapon) studio("models/weapons/w_rif_ak47_dropped.mdl") = weapon_ak47 : "AK-47" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_aug_dropped.mdl") = weapon_aug : "AUG" []
@@ -8635,6 +8536,8 @@
 	"A single Buy Zone entity must be either terrorist or counter-terrorist, it cannot be both. Should have " +
 	"the toolstrigger material applied to all sides"
 [
+	input SetEnabled(void) : "Sets this buyzone as enabled."
+	input SetDisabled(void) : "Sets this buyzone as disabled."
 	input SetTeam_TerroristOnly(void) : "Make it so only terrorist can buy from this buyzone."
 	input SetTeam_CTOnly(void) : "Make it so only CT's can buy from this buyzone."
 	input SetTeam_AllTeams(void) : "Make it so all teams can buy from this buyzone."
@@ -8732,6 +8635,10 @@
 
 ]
 
+@PointClass base(Targetname) iconsprite("editor/gibshooter.vmt") = info_gascanister_launchpoint : 
+	"The position a gas canister will launch from in Survival Mode." 
+[
+]
 
 @PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = point_territory_control_rules
 	: "The Territory Control rules entity (VERY IMPORTANT!)"
@@ -8783,6 +8690,10 @@
 	input AddTeamMoneyTerrorist(void) : "Add money to players on team TERRORIST."
 	input AddTeamMoneyCT(void) : "Add money to players on team COUNTER TERRORIST."
 	input AddMoneyPlayer(void) : "Add money directly to the player activating this entity. (no chat description)"
+	input SpendMoneyFromPlayer(void) : "If the player has [money amount] or more, take [money amount] away."
+	
+	output OnMoneySpent(void) : "Fires when input SpendMoneyFromPlayer succeeded."
+	output OnMoneySpentFail(void) : "Fires when input SpendMoneyFromPlayer failed. (Player didn't have enough money)"
 ]
 
 //-------------------------------------------------------------------------
@@ -8850,6 +8761,15 @@
 
 ]
 
+
+@PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = game_survival_logic : 
+	"An entity that will fire outputs when events happen during Survival mode." 
+[
+	// Outputs
+	output OnZoneRocketWarning(void) : "Fired when the warning sound plays that announcing incoming rockets"
+	output OnZoneRocketStartLaunch(void) : "Fired when the barrage of rockets start launching (after the announce)"
+	output OnZoneEndGameStart(void) : "Fired when the end game starts and no more rockets will fire, but the zones start shrinking"
+]
 
 @PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = game_coopmission_manager : 
 	"An entity that keeps track of the coop wave/phase and fires outputs when players complete them." 
@@ -9010,6 +8930,101 @@
 	input Trigger(void) : "Swap to this skybox."
 ]
 
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/cases/case_heavy_weapon.mdl") = point_dz_weaponspawn :
+	"Survival weapon spawn point.\n"
+[
+	groupID(integer) : "Group ID" : 0 : "When an item spawns in a spawn point, other nearby spawn points with the same ID will have less chance of spawning an item."
+	default_weight(float) : "Default Weight" : 100 : "Weight used to distribute item"
+	door_name(string) : "Door Name" : "" : "This point is behind a specific door"
+]
+
+@PointClass base(Targetname) sphere() = point_dz_weaponspawn_group : 
+	"Survival weapon spawn grouping.\n"
+[
+	radius(integer) : "Radius" : 512
+]
+
+@SolidClass base(Trigger) = trigger_survival_playarea : 
+	"A trigger volume that defines the bounds of the survival play area."
+[
+]
+
+@SolidClass base(Trigger) = trigger_survival_maproom : 
+	"A trigger volume that encompasses the survival map room."
+[
+]
+
+@SolidClass base(Trigger) = trigger_survival_maproom_table : 
+	"A trigger volume that defines the top of the survival map room minimap table."
+[
+]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/dronegun/dronegun.mdl") = point_dz_dronegun :
+	"DroneGun Emplacement\n"
+[
+	spawnAutomatically(choices) : "Spawn Automatically?" : 1 : "Dronegun always spawns on game start, no input required." =
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	input spawn(void) : "Input to spawn the dronegun."
+]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/upgrades/parachutepack.mdl") = point_dz_parachute :
+	"Parachute Backpack\n"
+[
+]
+
+@PointClass base(PropDoorRotating, DamageFilter) studioprop() = dz_door : "Survival Door"
+[
+	is_security_door(boolean) : "Security door" : 0 : "This is a security door"
+]
+
+@PointClass base(Targetname, Parentname, Angles) studio("models/props_survival/counter/counter_a.mdl") = prop_counter :
+	"Numerical Display Counter\n"
+[
+	initialValue(integer) : "Initial Value" : 0
+]
+
+@PointClass base(Targetname, Angles, Parentname) studio("models/editor/axis_helper_thick.mdl") = vgui_world_text_panel : 
+	"A VGUI world panel that can be placed and modified by entity logic and display localized text"
+[
+	enabled(boolean) : "Enabled by default?" : 1
+
+	displaytext(string) : "Display Text" : "" : "The default text to display"
+	displaytextoption(string) : "Display Text Option" : "" : "Text that will be inserted in the place of a %s1 if you token has one - if you don't know what that is, don't use this"
+	font(string) : "Font" : "DefaultLarge" : "The font that will be used (should match an entry in your Scheme.res file)"
+
+	width(integer) : "Panel width" : 256 : "Width of the panel in units."
+	height(integer) : "Panel height" : 128 : "Height of the panel in units."
+	textpanelwidth(integer) : "Text Panel Width" : 256 : "Sometimes the text panel needs to be smaller to force a wrap, but keep the same font size."
+
+	textcolor(color255) : "Text Color (R G B)" : "255 255 255" : "The color of the text."
+
+	input Enable(void) : "Make text visible."
+	input Disable(void) : "Make text invisible."
+
+	input SetDisplayText(string) : "Sets the display text."
+]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/safe/safe.mdl") sphere(radius) = func_survival_c4_target : 
+	"A brush entity that can be broken by c4 within specific radius in survival mode." 
+[
+	radius(float) : "Radius" : 350 : "C4 must be planted within this radius to destroy this entity"
+]
+
+@SolidClass base(Targetname, Parentname ) = func_tablet_blocker:  
+	"Disable the tablet for players within this region."
+[
+]
+
+@PointClass sphere(radius) = info_map_region: 
+	"Point entity for setting the name of a map region for display." 
+[
+	radius(float) : "Radius" : 1200 : "The area of the map witin this sphere will be named according to this entity."
+	token(string) : "Name Token" : "" : "Localization token for this region's name."
+]
 
 @PointClass base(Targetname, Angles, Parentname) studio("models/editor/axis_helper_thick.mdl") = vgui_world_text_panel : 
 	"A VGUI world panel that can be placed and modified by entity logic and display localized text"
