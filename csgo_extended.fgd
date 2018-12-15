@@ -8987,27 +8987,6 @@
 	initialValue(integer) : "Initial Value" : 0
 ]
 
-@PointClass base(Targetname, Angles, Parentname) studio("models/editor/axis_helper_thick.mdl") = vgui_world_text_panel : 
-	"A VGUI world panel that can be placed and modified by entity logic and display localized text"
-[
-	enabled(boolean) : "Enabled by default?" : 1
-
-	displaytext(string) : "Display Text" : "" : "The default text to display"
-	displaytextoption(string) : "Display Text Option" : "" : "Text that will be inserted in the place of a %s1 if you token has one - if you don't know what that is, don't use this"
-	font(string) : "Font" : "DefaultLarge" : "The font that will be used (should match an entry in your Scheme.res file)"
-
-	width(integer) : "Panel width" : 256 : "Width of the panel in units."
-	height(integer) : "Panel height" : 128 : "Height of the panel in units."
-	textpanelwidth(integer) : "Text Panel Width" : 256 : "Sometimes the text panel needs to be smaller to force a wrap, but keep the same font size."
-
-	textcolor(color255) : "Text Color (R G B)" : "255 255 255" : "The color of the text."
-
-	input Enable(void) : "Make text visible."
-	input Disable(void) : "Make text invisible."
-
-	input SetDisplayText(string) : "Sets the display text."
-]
-
 @PointClass base(Targetname, Angles) studio("models/props_survival/safe/safe.mdl") sphere(radius) = func_survival_c4_target : 
 	"A brush entity that can be broken by c4 within specific radius in survival mode." 
 [
