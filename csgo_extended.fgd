@@ -1,71 +1,11 @@
-//KiD.fgd Changelog
-//
-//****************************************************************************
-//
-//V1 - 04/11/2017
-//
-// * Added _minlight key to worldspawn
-// * Added Parentname base to phys_thruster and phys_torque (thanks, AberantObscurity)
-// * Added Func_monitor brush entity
-// * Added Point_camera point entity
-// * Added Player_speedmod point entity
-// * Added player_weaponstrip point entity
-// * Added chicken ai entity (Thanks darnias & Revöker)
-// * Added trigger_vphysics_motion brush entity
-// * Added trigger_brush brush entity
-// * Added func_plat brush entity
-// * Added func_train brush entity
-// * Added Point_sphere point entity
-// * Added Use input for game_player_equip
-// * Added Weapon and ammo values for game_player_equip
-// * Added an entity called "player."  Any inputs sent to "player" will actually be passed to all the clients. Untested in csgo will crash if added directly to the map.
-// * Added _exponent key back to light_spot since it's used by RAD
-// * Added disableshadows, -minlight keyflags to renderfields
-// * Added enable/disable shadow inputs to renderfields
-// * Added Targetname, Parentname, angles to base playerclass
-//--------------------------------------------------------------------------------------------------------
-//
-//V2 - 04/12/2017
-//
-// * Added CollisionGroup to most entities
-// * Added env_particle_trail
-//---------------------------------------------------------------------------------------------------------
-//
-//V3 - 04/14/2017
-//
-// * Added RenderFields to Breakable base class
-// * Breakable Base class now shows explosion radius in hammer
-// * Added parentname to BaseNPC
-// * Added Rendercolor to Parentname base
-//
-//
-//
-//
-//
-//
-// * Note: Func_monitor needs dev_tvmonitor texture
-// 
-//
-// * ToDo:
-// * Search Datamaps for full keyvalues
-// * Add more player flags
-// * Add simple_physics_brush
-// * Add simple_physics_prop
-// * Add player key values and inputs
-// * Add entity blocker entity
-// * Add entityflame
-// * Add wearable_item
-// * Add waterbullet
-// * Add target_changegravity
-// * Add grenade and inferno entities
-
+//KiD Fearless and Revoker Present
+//Extended CSGO FGD
+//For changelog and updates check out
+//https://github.com/kidfearless/csgo_extended.fgd
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Start of base.fgd//////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
 //
 //====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
@@ -7951,20 +7891,12 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 		256 : "Aiming Assistance (Player Only)" : 0
 	]
 ]
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////End of base.fgd////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Start of csgo.fgd//////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
 //====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: Counter-Strike: Source game definition file (.fgd) 
