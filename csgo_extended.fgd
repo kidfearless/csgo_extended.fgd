@@ -7021,8 +7021,10 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	"by their initial offset from the landmark, and their angles are left alone."
 [
 	target(target_destination) : "Remote Destination" : : "The entity specifying the point to which entities should be teleported."
-	landmark(target_destination) : "Local Destination Landmark" : "!Activator" : "If specified, then teleported entities are offset from the target by their initial offset from the landmark."
-	UseLandmarkAngles(boolean) : "Use Landmark Angles" : 1 : "Forces the teleported object to snap to the angles of the destination landmark."
+	landmark(target_destination) : "Local Landmark" :  : "If specified, then teleported entities are offset from the target by their initial offset from the landmark.  "+  
+														"Use !activator to use the player's velocity to continue through the teleport.  "+
+														"Use an info_target for a smoother teleporting experince"
+	UseLandmarkAngles(boolean) : "Use Destination Angles" : 0 : "Forces the teleported object to snap to the angles of the destination."
 	CheckDestIfClearForPlayer(boolean) : "Only Spawn-Valid Destinations" : 0 : "Only teleport if there is a clear teleport destination."
 	
 	input SetRemoteDestination(string) : "Set a new target to teleport to."
