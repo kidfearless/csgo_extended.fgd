@@ -2545,7 +2545,7 @@
 		4: "Only Strip Same Weapon Type" : 0
 	]
 
-// Knife
+// Knife and Melee
 	weapon_knife (choices) : "Give Knife" : "" = 
 	[
 		"": "No"
@@ -2553,6 +2553,24 @@
 	]
 
 	weapon_knifegg (choices) : "Give Gold Knife" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
+	
+	weapon_axe (choices) : "Give Axe" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
+	
+	weapon_hammer (choices) : "Give Hammer" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
+	
+	weapon_spanner (choices) : "Give Wrench" : "" = 
 	[
 		"": "No"
 		1: "Yes"
@@ -8416,6 +8434,9 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 @PointClass base(Weapon) studio("models/weapons/w_pist_hkp2000_dropped.mdl") = weapon_hkp2000 : "P2000" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_incendiarygrenade_dropped.mdl") = weapon_incgrenade : "Incendiary Grenade" []
 @PointClass base(Weapon) studio("models/weapons/w_knife.mdl") = weapon_knife : "Knife" []
+@PointClass base(Weapon) studio("models/weapons/w_axe.mdl") = weapon_axe : "Axe" []
+@PointClass base(Weapon) studio("models/weapons/w_hammer.mdl") = weapon_hammer : "Hammer" []
+@PointClass base(Weapon) studio("models/weapons/w_spanner.mdl") = weapon_spanner : "Wrench" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_m4a1_dropped.mdl") = weapon_m4a1 : "M4A4" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_m4a1_s_dropped.mdl") = weapon_m4a1_silencer : "M4A1 Silenced" []
 @PointClass base(Weapon) studio("models/weapons/w_mach_m249_dropped.mdl") = weapon_m249 : "M249 Para" []
@@ -8442,7 +8463,6 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 @PointClass base(Weapon) studio("models/weapons/w_eq_taser.mdl") = weapon_taser : "weapon_taser" []
 @PointClass base(Weapon) studio("models/weapons/w_defuser.mdl") = item_defuser : "Defuse Kit" []
 @PointClass base(Weapon) studio("models/weapons/w_c4_planted.mdl") = weapon_c4 : "C4 Bomb" []
-
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
 @PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles" 
