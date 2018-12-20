@@ -2644,6 +2644,11 @@
 	]
 	
 // SMGs
+weapon_mp5sd (choices) : "Give MP5sd" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
 	weapon_mp7 (choices) : "Give MP7" : "" = 
 	[
 		"": "No"
@@ -8417,6 +8422,7 @@
 @PointClass base(Weapon) studio("models/weapons/w_smg_mac10_dropped.mdl") = weapon_mac10 : "MAC-10" []
 @PointClass base(Weapon) studio("models/weapons/w_shot_mag7_dropped.mdl") = weapon_mag7 : "MAG-7" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_molotov_dropped.mdl") = weapon_molotov : "Molotov" []
+@PointClass base(Weapon) studio("models/weapons/w_smg_mp5sd_dropped.mdl") = weapon_mp5sd : "MP5-SD" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_mp7_dropped.mdl") = weapon_mp7 : "MP7" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_mp9_dropped.mdl") = weapon_mp9 : "MP9" []
 @PointClass base(Weapon) studio("models/weapons/w_mach_negev_dropped.mdl") = weapon_negev : "Negev" []
@@ -8858,6 +8864,7 @@
 		"weapon_negev" : "Negev"
 		"weapon_sawedoff" : "Sawedoff"
 		"weapon_tec9" : "Tec9"
+		"weapon_mp5sd" : "Mp5sd"
 		"weapon_mp7" : "Mp7"
 		"weapon_mp9" : "Mp9"
 		"weapon_nova" : "Nova"
