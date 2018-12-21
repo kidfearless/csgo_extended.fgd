@@ -114,7 +114,6 @@
 	input RunScriptFile(script) : "Execute a game script file from disk"
 	input RunScriptCode(string) : "Execute a string of script source code"
 	
-
 	// Pre-defined contexts at server startup time (set by mapper)
 	ResponseContext(string) : "Response Contexts" : "" : "Response system context(s) for this entity. Format should be: 'key:value,key2:value2,etc'. When this entity speaks, the list of keys & values will be passed to the response rules system."
 
@@ -144,6 +143,7 @@
 	parentname(target_destination) : "Parent" : : "The name of this entity's parent in the movement hierarchy. Entities with parents move with their parent."
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
 	//basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
+
 	// Inputs
 	input SetParent(string) : "Changes the entity's parent in the movement hierarchy."
 	input SetParentAttachment(string) : "Change this entity to attach to a specific attachment point on its parent. Entities must be parented before being sent this input. The parameter passed in should be the name of the attachment."
@@ -305,7 +305,6 @@
 @BaseClass = Global 
 [ 
 	globalname(string) : "Global Entity Name" : "" : "Name by which this entity is linked to another entity in a different map. When the player transitions to a new map, entities in the new map with globalnames matching entities in the previous map will have the previous map's state copied over their state."
-	
 	//basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
 ]
 
@@ -3141,7 +3140,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	target(target_destination) : "Entity to look at" : : "Name of entity that dead players will face while in intermission at this spot."
 ]
 
-@PointClass base(Targetname) icon("editor/info_landmark") = info_landmark : 
+@PointClass base(Targetname) iconsprite("editor/info_landmark") = info_landmark : 
 	"An entity that acts as a landmark for transitions to another level. There should be a corresponding info_landmark entity in the next map. Entities will be transitioned to the next level relative to the info_landmark entities."
 [
 ]
@@ -3461,7 +3460,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	_lightscaleHDR(float) : "BrightnessScaleHDR" : "1" : "Amount to scale the light by when compiling for HDR."
 	_ambientHDR(color255) : "AmbientHDR" : "-1 -1 -1 1"
 	_AmbientScaleHDR(float) : "AmbientScaleHDR" : "1" : "Amount to scale the ambient light by when compiling for hdr."
-	pitch(integer) : "Pitch" : 0 : "The downward pitch of the light from the sun. 0 is horizontal, -90 is straight down."																												  
+	pitch(integer) : "Pitch" : 0 : "The downward pitch of the light from the sun. 0 is horizontal, -90 is straight down."
 	SunSpreadAngle(float) : "SunSpreadAngle" : 0 : "The angular extent of the sun for casting soft shadows. Higher numbers are more diffuse. 5 is a good starting value."
 	
 	pattern(string) : "Custom Appearance" : "" : "Set a custom pattern of light brightness for this light. Pattern format is a string of characters, where 'a' is total darkness, 'z' fully bright. i.e. 'aaggnnttzz' would be a steppy fade in from dark to light."
@@ -4363,8 +4362,6 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	input SetGlowEnabled(void) : "Starts the glow."
 	input SetGlowDisabled(void) : "Stops the glow."
 ]
-
-
 //-------------------------------------------------------------------------
 //
 // Cube map sample
@@ -5563,7 +5560,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 //
 //-------------------------------------------------------------------------
 
-@SolidClass base(BreakableBrush, Targetname, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
+@SolidClass base(BreakableBrush, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
 	"A brush entity that's physically simulated."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -5710,7 +5707,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	output OnAwakened(void) : "Fired when this entity becomes awake (collision/force is applied)."
 ]
 
-@SolidClass base(BreakableBrush, Targetname, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
+@SolidClass base(BreakableBrush, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
 	"A pushable brush object with very primitive physics."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -6091,7 +6088,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	enablelightbounce(boolean) : "Enable Bounced Lighting" : 0 : "Whether VRAD should create indirect lighting from this prop."
 	preventpropcombine(boolean) : "Disable Prop Combine" : 0 : "Prevent this static prop from combining with any other static props in vbsp."
 	
-	uniformscale(float) : "Uniform Scale Override" : 1 : "Resize the static prop."																																		  
+	uniformscale(float) : "Uniform Scale Override" : 1 : "Resize the static prop."
 ]
 
 @BaseClass = BaseFadeProp
@@ -6961,7 +6958,9 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 
 	speed(integer) : "Speed of Push" : 40 : "The speed at which to push entities away, in inches / second."
 	alternateticksfix(float) : "Scale force for alternate ticks" : "0" : "If nonzero, scale the force by this amount when running with alternate ticks. This fixes problems with an overly large force due to the longer frametime on when running with sv_alternateticks 1."
-
+	OnlyFallingPlayers(boolean) : "Only Falling Players" : 0 : "Only affect players if they are falling (and not pressing jump)"
+	FallingSpeedThreshold(float) : "Player fall speed" : "-150" : "Player must be falling this fast for push to happen"
+	
 	// Inputs
 	input SetPushDirection(vector) : "Sets the angles indicating the direction to push touched entities."
 ]
