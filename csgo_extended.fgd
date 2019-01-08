@@ -7339,12 +7339,20 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	renderamt(integer) : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
 
-	rendermode(choices) : "Render Mode" : 5 =
+	rendermode(choices) : "Render Mode" : 5 : "Additive works best.  Normal and solid are opaque.  The rest may have undesirable effects.  " +
+											"Example world space glow will render through walls." =
 	[
 		0: "Normal"
+		1: "Color"
+		2: "Texture"
+		3: "Glow"
 		4: "Solid"
 		5: "Additive"
+		7: "Additive Fractional Frame"
+		9: "World Space Glow"
+		10: "Dont Render"
 	]
+
 	
 	// Inputs
 	input ColorRedValue(float) : "Sets the red color channel's value (0 - 255)."
