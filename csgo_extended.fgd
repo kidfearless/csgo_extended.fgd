@@ -2601,7 +2601,7 @@
 	]
 	
 // SMGs
-weapon_mp5sd (choices) : "Give MP5sd" : "" = 
+	weapon_mp5sd (choices) : "Give MP5sd" : "" = 
 	[
 		"": "No"
 		1: "Yes"
@@ -5560,7 +5560,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 //
 //-------------------------------------------------------------------------
 
-@SolidClass base(BreakableBrush, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
+@SolidClass base(BreakableBrush, Origin, RenderFields, Shadow, Reflection, Parentname) = func_physbox : 
 	"A brush entity that's physically simulated."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -5707,7 +5707,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	output OnAwakened(void) : "Fired when this entity becomes awake (collision/force is applied)."
 ]
 
-@SolidClass base(BreakableBrush, Origin, BasePropPhysics, RenderFields, Shadow, Reflection) = func_pushable : 
+@SolidClass base(BreakableBrush, Origin, BasePropPhysics, RenderFields, Shadow, Reflection, Parentname) = func_pushable : 
 	"A pushable brush object with very primitive physics."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -6245,7 +6245,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	output OnOutOfWorld(void) : "Fired whenever the prop is out of the allowed world bounds."
 ]
 
-@PointClass base(BasePropPhysics) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics_override :
+@PointClass base(BasePropPhysics, Parentname) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics_override :
 	"A prop that physically simulates as a single rigid body. It can be constrained to other physics objects using hinges "+
 	"or other constraints. It can also be configured to break when it takes enough damage. Health can be overridden on this version."
 [
@@ -6258,7 +6258,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 	input IgniteHitboxFireScale(float) : "Ignite, with a parameter hitbox fire scale."
 ]
 
-@PointClass base(BasePropPhysics, RenderFields) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics :
+@PointClass base(BasePropPhysics, RenderFields, Parentname, Origin) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics :
 	"A prop that physically simulates as a single rigid body. It can be constrained to other physics objects using hinges "+
 	"or other constraints. It can also be configured to break when it takes enough damage. "+
 	"Note that the health of the object will be overridden by the health inside the model, to ensure consistent health game-wide. "+
@@ -8360,6 +8360,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 @PointClass base(Weapon) studio("models/weapons/w_rif_ak47_dropped.mdl") = weapon_ak47 : "AK-47" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_aug_dropped.mdl") = weapon_aug : "AUG" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_awp_dropped.mdl") = weapon_awp : "AWP" []
+@PointClass base(Weapon) studio("models/weapons/w_eq_charge.mdl") = weapon_breachcharge : "Breach Charge" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_bizon_dropped.mdl") = weapon_bizon : "PP-Bizon" []
 @PointClass base(Weapon) studio("models/weapons/w_pist_cz_75_dropped.mdl") = weapon_cz75a : "CZ75a" []
 @PointClass base(Weapon) studio("models/weapons/w_pist_deagle_dropped.mdl") = weapon_deagle : "Desert Eagle" []
@@ -8406,7 +8407,7 @@ weapon_mp5sd (choices) : "Give MP5sd" : "" =
 @PointClass base(Weapon) studio("models/weapons/w_c4_planted.mdl") = weapon_c4 : "C4 Bomb" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
-@PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles" 
+@PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles" []
 [
   skin(float) : "skin" : "0" : "skin of the nightvision goggles"
   bodygroup(float) : "Bodygroup" : "0" : "The skin group of the nightvision goggles"
