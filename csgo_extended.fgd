@@ -8407,7 +8407,7 @@
 @PointClass base(Weapon) studio("models/weapons/w_c4_planted.mdl") = weapon_c4 : "C4 Bomb" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
-@PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles"
 [
   skin(float) : "skin" : "0" : "skin of the nightvision goggles"
   bodygroup(float) : "Bodygroup" : "0" : "The skin group of the nightvision goggles"
