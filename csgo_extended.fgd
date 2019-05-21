@@ -1939,6 +1939,23 @@
 	output OnHeatLevelEnd(void) : "Fires when the heat level drops below the target level."
 ]
 
+@PointClass base(Targetname) size(-4 -4 -4, 4 4 4) color(0 180 0) = env_entity_dissolver: "Entity Dissolver"
+[
+	input Dissolve(string) : "Dissolve target, if no target is passed it'll use the target specified in the target field."
+	target(target_destination) : "Target to Dissolve" : "" : "Targetname of the entity you want to dissolve."
+
+	magnitude(integer) : "Magnitude" : 250 : "How strongly to push away from the center."
+
+
+	dissolvetype(choices) : "Dissolve Type" : "Energy" =
+	[
+		0 : "Energy"
+		1 : "Heavy electrical"
+		2 : "Light electrical"
+		3 : "Core Effect"
+	]
+]
+
 @PointClass base(Targetname) size(-4 -4 -4, 4 4 4) color(0 180 0) = env_entity_igniter : 
 	"An entity that catches a target entity on fire. If the entity is an animating model, it will have sprite flames attached to its skeleton. Otherwise the entity will emit particle flame puffs."
 [
