@@ -8373,31 +8373,6 @@
 // Weapons
 //
 //-------------------------------------------------------------------------
-<<<<<<< HEAD
-@BaseClass base(Targetname, Angles, Parentname, RenderFields) color(255 255 255) = Weapon
-[
-	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
-	CanBePickedUp(choices) : "Is this weapon allowed to be picked up?" : 1 : "Whether or not the weapon can be picked up" =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
-	spawnflags(Flags) =
-	[
-		1 : "Start asleep (don't fall to ground)" : 0
-	]
-
-	output OnPlayerUse(void) : "Fired when the player +USEs the weapon."
-	output OnPlayerPickup(void) : "Fires when the player picks up this weapon"
-	output OnIgnite(void) : "Fired when the weapon catches fire."
-	// output OnNPCPickup(void) : "Fired when an NPC picks up the weapon."
-
-	input Ignite(void) : "Sets the weapon afire."
-]
-
-=======
->>>>>>> origin/master
-
 @PointClass base(Weapon) studio("models/weapons/w_rif_ak47_dropped.mdl") = weapon_ak47 : "AK-47" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_aug_dropped.mdl") = weapon_aug : "AUG" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_awp_dropped.mdl") = weapon_awp : "AWP" []
