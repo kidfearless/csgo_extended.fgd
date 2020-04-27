@@ -1,71 +1,11 @@
-//KiD.fgd Changelog
-//
-//****************************************************************************
-//
-//V1 - 04/11/2017
-//
-// * Added _minlight key to worldspawn
-// * Added Parentname base to phys_thruster and phys_torque (thanks, AberantObscurity)
-// * Added Func_monitor brush entity
-// * Added Point_camera point entity
-// * Added Player_speedmod point entity
-// * Added player_weaponstrip point entity
-// * Added chicken ai entity (Thanks darnias & Revöker)
-// * Added trigger_vphysics_motion brush entity
-// * Added trigger_brush brush entity
-// * Added func_plat brush entity
-// * Added func_train brush entity
-// * Added Point_sphere point entity
-// * Added Use input for game_player_equip
-// * Added Weapon and ammo values for game_player_equip
-// * Added an entity called "player."  Any inputs sent to "player" will actually be passed to all the clients. Untested in csgo will crash if added directly to the map.
-// * Added _exponent key back to light_spot since it's used by RAD
-// * Added disableshadows, -minlight keyflags to renderfields
-// * Added enable/disable shadow inputs to renderfields
-// * Added Targetname, Parentname, angles to base playerclass
-//--------------------------------------------------------------------------------------------------------
-//
-//V2 - 04/12/2017
-//
-// * Added CollisionGroup to most entities
-// * Added env_particle_trail
-//---------------------------------------------------------------------------------------------------------
-//
-//V3 - 04/14/2017
-//
-// * Added RenderFields to Breakable base class
-// * Breakable Base class now shows explosion radius in hammer
-// * Added parentname to BaseNPC
-// * Added Rendercolor to Parentname base
-//
-//
-//
-//
-//
-//
-// * Note: Func_monitor needs dev_tvmonitor texture
-// 
-//
-// * ToDo:
-// * Search Datamaps for full keyvalues
-// * Add more player flags
-// * Add simple_physics_brush
-// * Add simple_physics_prop
-// * Add player key values and inputs
-// * Add entity blocker entity
-// * Add entityflame
-// * Add wearable_item
-// * Add waterbullet
-// * Add target_changegravity
-// * Add grenade and inferno entities
-
+//KiD Fearless and Revoker Present
+//Extended CSGO FGD
+//For changelog and updates check out
+//https://github.com/kidfearless/csgo_extended.fgd
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Start of base.fgd//////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
 //
 //====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
@@ -170,10 +110,12 @@
 	vscripts(scriptlist) : "Entity Scripts" : "" : "Name(s) of script files that are executed after all entities have spawned."
 	thinkfunction(string) : "Script think function" : "" : "Name of a function in this entity's script scope which will be called automatically."
 
-	basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
+	//basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
 	input RunScriptFile(script) : "Execute a game script file from disk"
 	input RunScriptCode(string) : "Execute a string of script source code"
 	
+	// Pre-defined contexts at server startup time (set by mapper)
+	ResponseContext(string) : "Response Contexts" : "" : "Response system context(s) for this entity. Format should be: 'key:value,key2:value2,etc'. When this entity speaks, the list of keys & values will be passed to the response rules system."
 
 	
 	// Inputs
@@ -184,6 +126,10 @@
 	input FireUser2(void) : "Causes this entity's OnUser2 output to be fired."
 	input FireUser3(void) : "Causes this entity's OnUser3 output to be fired."
 	input FireUser4(void) : "Causes this entity's OnUser4 output to be fired."
+
+	input AddContext(string) : "Adds a context to this entity's list of response contexts. The format should be 'key:value'."
+	input RemoveContext(string) : "Remove a context from this entity's list of response contexts. The name should match the 'key' of a previously added context."
+	input ClearContext(void) : "Removes all contexts in this entity's list of response contexts."
 
 	// Outputs	
 	output OnUser1(void) : "Fired in response to FireUser1 input."
@@ -196,7 +142,8 @@
 [ 
 	parentname(target_destination) : "Parent" : : "The name of this entity's parent in the movement hierarchy. Entities with parents move with their parent."
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
-	basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
+	//basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
+
 	// Inputs
 	input SetParent(string) : "Changes the entity's parent in the movement hierarchy."
 	input SetParentAttachment(string) : "Change this entity to attach to a specific attachment point on its parent. Entities must be parented before being sent this input. The parameter passed in should be the name of the attachment."
@@ -206,7 +153,6 @@
 
 @BaseClass = BaseBrush
 [
-
 	// Inputs
 	input SetTextureIndex(integer) : "Used by HL1Port. Sets the brush texture index. Use a material_modify_control entity instead."
 	input IncrementTextureIndex(void) : "Used by HL1Port. Increments the brush texture index. Use a material_modify_control entity instead."
@@ -359,8 +305,7 @@
 @BaseClass = Global 
 [ 
 	globalname(string) : "Global Entity Name" : "" : "Name by which this entity is linked to another entity in a different map. When the player transitions to a new map, entities in the new map with globalnames matching entities in the previous map will have the previous map's state copied over their state."
-	
-	basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
+	//basevelocity(float) : "Base Velocity" : "0 0 0" : "Base velocity of object. Format: <X -1500 - 1500> <Y -1500 - 1500> <Z -1500 - 1500>"
 ]
 
 // Base class for env_global
@@ -375,7 +320,7 @@
 	]
 	
 	counter(integer) : "Counter" : 0 : "An integer counter value associated with this global."
-	
+
 	spawnflags(flags) =
 	[
 		1 : "Set Initial State" : 0
@@ -402,13 +347,6 @@
 
 @BaseClass = ResponseContext
 [
-	// Inputs
-	input AddContext(string) : "Adds a context to this entity's list of response contexts. The format should be 'key:value'."
-	input RemoveContext(string) : "Remove a context from this entity's list of response contexts. The name should match the 'key' of a previously added context."
-	input ClearContext(void) : "Removes all contexts in this entity's list of response contexts."
-
-	// Pre-defined contexts at server startup time (set by mapper)
-	ResponseContext(string) : "Response Contexts" : "" : "Response system context(s) for this entity. Format should be: 'key:value,key2:value2,etc'. When this entity speaks, the list of keys & values will be passed to the response rules system."
 ]
 
 @BaseClass base(Targetname, DamageFilter, Shadow, Reflection, RenderFields) = Breakable
@@ -769,7 +707,6 @@
 
 @BaseClass base(Targetname, Parentname, Angles) color(0 255 0) = PlayerClass []
 
-
 @BaseClass color(180 10 180) = Light
 [
 	_light(color255) : "Brightness" : "255 255 255 200"
@@ -988,7 +925,6 @@
 ]
 
 
-
 //-------------------------------------------------------------------------
 //
 // World
@@ -1192,6 +1128,7 @@
 	material(sprite) : "Material Name" : "sprites/light_glow02_add_noz" : "Material of the inner glow."
 	overlaymaterial(sprite) : "Overlay Material Name" : "sprites/light_glow02_add_noz" : "Material of the overlay glow."
 
+	glowDistanceScale(float) : "Glow Distance Scale" : "0.99" : "Scales the distance used to test for sun glow occlusion, 0.99 will act the old way."
 	HDRColorScale(float) : "HDR color scale." : "1.0" : "float value to multiply sprite color by when running in HDR mode."
 
 	// Inputs
@@ -1443,6 +1380,15 @@
 	"Legacy support. Use func_brush instead." 
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
+]
+
+@SolidClass base(Targetname) = func_weight_button : "A button which activates after a specified amount of weight is applied"
+[
+	WeightToActivate(float) 	: "Amount of weight required before this button activates."
+
+	//Outputs
+	output OnPressed(void)		: "Fired when the button is touching enough weight."
+	output OnReleased(void)		: "Fired when the button was pressed, but weight was removed."
 ]
 
 @SolidClass base(Targetname, EnableDisable) = func_clip_vphysics : 
@@ -1993,6 +1939,23 @@
 	output OnHeatLevelEnd(void) : "Fires when the heat level drops below the target level."
 ]
 
+@PointClass base(Targetname) size(-4 -4 -4, 4 4 4) color(0 180 0) = env_entity_dissolver: "Entity Dissolver"
+[
+	input Dissolve(string) : "Dissolve target, if no target is passed it'll use the target specified in the target field."
+	target(target_destination) : "Target to Dissolve" : "" : "Targetname of the entity you want to dissolve."
+
+	magnitude(integer) : "Magnitude" : 250 : "How strongly to push away from the center."
+
+
+	dissolvetype(choices) : "Dissolve Type" : "Energy" =
+	[
+		0 : "Energy"
+		1 : "Heavy electrical"
+		2 : "Light electrical"
+		3 : "Core Effect"
+	]
+]
+
 @PointClass base(Targetname) size(-4 -4 -4, 4 4 4) color(0 180 0) = env_entity_igniter : 
 	"An entity that catches a target entity on fire. If the entity is an animating model, it will have sprite flames attached to its skeleton. Otherwise the entity will emit particle flame puffs."
 [
@@ -2374,7 +2337,7 @@
 	input SparkOnce(void) : "Spark once."
 ]
 
-@PointClass base(Targetname, Parentname, RenderFields, SystemLevelChoice) size(-2 -2 -2, 2 2 2) sprite() color(20 140 20) = env_sprite : 
+@PointClass base(Targetname, Angles, Parentname, RenderFields, SystemLevelChoice) size(-2 -2 -2, 2 2 2) sprite() color(20 140 20) = env_sprite : 
 	"An entity that controls the drawing of a sprite in the world." 
 [
 	framerate(string) : "Framerate" : "10.0" : "Rate at which the sprite should animate, if at all."
@@ -2538,7 +2501,7 @@
 		4: "Only Strip Same Weapon Type" : 0
 	]
 
-// Knife
+// Knife and Melee
 	weapon_knife (choices) : "Give Knife" : "" = 
 	[
 		"": "No"
@@ -2546,6 +2509,24 @@
 	]
 
 	weapon_knifegg (choices) : "Give Gold Knife" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
+	
+	weapon_axe (choices) : "Give Axe" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
+	
+	weapon_hammer (choices) : "Give Hammer" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
+	
+	weapon_spanner (choices) : "Give Wrench" : "" = 
 	[
 		"": "No"
 		1: "Yes"
@@ -2637,6 +2618,11 @@
 	]
 	
 // SMGs
+	weapon_mp5sd (choices) : "Give MP5sd" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
 	weapon_mp7 (choices) : "Give MP7" : "" = 
 	[
 		"": "No"
@@ -2754,56 +2740,16 @@
 	]
 
 // Equipment
-	weapon_hegrenade (choices) : "Give HE Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_flashbang (choices) : "Give Flashbang Grenade" : "" = 
-	[
-		"": "No"
-		1: "1"
-		2: "2"
-	]
-
-	weapon_smokegrenade (choices) : "Give Smoke Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_tagrenade (choices) : "Give Tactical Awareness Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_healthshot (choices) : "Give Healthshot" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
+	weapon_hegrenade (float) : "Give # HE Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_flashbang (float) : "Give # Flashbang Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_smokegrenade (float) : "Give # Smoke Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_tagrenade (float) : "Give # Tactical Awareness Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_healthshot (float) : "Give # Healthshot" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_decoy (float) : "Give # Decoy Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_molotov (float) : "Give # Molotov Cocktail" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_incgrenade (float) : "Give # Incendiary Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	
-	weapon_decoy (choices) : "Give Decoy Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	weapon_molotov (choices) : "Give Molotov Cocktail" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-	
-	weapon_incgrenade (choices) : "Give Incendiary Grenade" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-	
-	weapon_taser (choices) : "Give Taser" : "" = 
+	weapon_taser (choices) : "Give Taser" : "" =
 	[
 		"": "No"
 		1: "Yes"
@@ -2845,98 +2791,11 @@
 		1: "Yes"
 	]
 
-//AMMO
-	ammo_338mag (choices) : "Give .338 Magnum Ammo" : "" : "Weapons that use this ammo: Awp" =
-	[
-		"": "No"
-		1: "10"
-		2: "20"
-		3: "30 (Full)"
-	]
-
-	ammo_357sig (choices) : "Give .357 Ammo" : "" : "Weapons that use this ammo: P250, P2000" =
-	[
-		"": "No"
-		1: "13"
-		2: "26"
-		3: "39"
-		4: "52 (Full)"
-	]
-
-	ammo_45acp (choices) : "Give .45 Ammo" : "" : "Weapons that use this ammo:USP-Silencer, Mac-10, UMP45" =
-	[
-		"": "No"
-		1: "25"
-		2: "50"
-		3: "75"
-		4: "100 (Full)"
-	]
-
-	ammo_50AE (choices) : "Give .50 Ammo" : "" : "Weapons that use this ammo: Desert Eagle, R8-Revolver" =
-	[
-		"": "No"
-		1: "7"
-		2: "14"
-		3: "21"
-		4: "28"
-		5: "35 (Full)"
-	]
-
-	ammo_556mm_box (choices) : "Give 5.56 Ammo Box" : "" : "Weapons that use this ammo: M249, M4a4, M4a1-Silencer, SG-556, Galil, Famas, Aug, Negev" =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90"
-		4: "120"
-		5: "150"
-		6: "180"
-		7: "200 (Full)"
-	]
-
-	ammo_556mm (choices) : "Give 5.56 Ammo" : "" : "Weapons that use this ammo: M249, M4a4, M4a1-Silencer, SG-556, Galil, Famas, Aug, Negev" =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90 (Full)"
-	]
-
-	ammo_57mm (choices) : "Give 5.7 x 28mm Ammo" : "" : "Weapons that use this ammo: P90, Five-Seven" =
-	[
-		"": "No"
-		1: "50"
-		2: "100 (Full)"
-	]
-
-	ammo_762mm (choices) : "Give 7.62 NATO Ammo" : "" : "Weapons that use this ammo: Most of them." =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90 (Full)"
-	]
-
-	ammo_9mm (choices) : "Give 9mm Ammo" : "" : "Weapons that use this ammo: Glock, Elites, Tec-9, MP9, MP7, PP-Bizon, CZ-75-Auto" =
-	[
-		"": "No"
-		1: "30"
-		2: "60"
-		3: "90"
-		4: "120 (Full)"
-	]
-
-	ammo_buckshot (choices) : "Give 12 Gauge Ammo" : "" : "Weapons that use this ammo: Auto Shotgun, Nova, Mag7, Sawed-Off" =
-	[
-		"": "No"
-		1: "8"
-		2: "16"
-		3: "24"
-		4: "32 (Full)"
-	]
 	master(string) : "Team Master (Obsolete)" : : "Legacy support: The name of a master entity. If the master hasn't been activated, this entity will not activate."	
+	input use(void) : "This allows usage of the game_player_equip"
 	input TriggerForAllPlayers(void) : "This will force all connected players to take the weapon(s) specified."
 	input TriggerForActivatedPlayer(string) : "This will force the player who activated to equip the specified weapon."
+
 ]
 
 @PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = game_player_team : 
@@ -3027,7 +2886,7 @@
 	input Disable(void) : "Stop displaying the message text."
 ]
 
-@PointClass base(Targetname, Parentname, Angles) worldtext() = point_worldtext : 
+@PointClass base(Targetname, Parentname, Angles, RenderFields) worldtext() = point_worldtext : 
 	"An entity that displays a text message oriented in the world, at its origin."
 [
 	spawnflags(flags) =
@@ -3038,6 +2897,11 @@
 	message(string) : "Entity Message"
 	textsize(float) : "Text Size" : 10 : "Text Size."
 	color(color255) : "Color" : "255 255 255"
+	fademindist(float) : "Start Fade Dist/Pixels" : 400 : "Distance at which the text starts to fade."
+	fademaxdist(float) : "End Fade Dist/Pixels" : 1200 : "Maximum distance at which the text is visible."
+	fadescale(float) : "Fade Scale" : 1 : "If you specify a fade in the worldspawn, or if the engine is running under dx7, then the engine will forcibly fade out props even if fademindist/fademaxdist isn't specified." +
+												 " This scale factor gives you some control over the fade. Using 0 here turns off the forcible fades." +
+												 " Numbers smaller than 1 cause the text to fade out at further distances, and greater than 1 cause it to fade out at closer distances."
 
 	// Inputs
 	input Enable(void) : "Start displaying the message text, if the player is within the message radius."
@@ -3207,7 +3071,7 @@
 //
 //-------------------------------------------------------------------------
 
-@PointClass base(Targetname) decal() studio("models/editor/axis_helper_thick.mdl") = infodecal : 
+@PointClass base(Targetname, Origin) decal() studio("models/editor/axis_helper_thick.mdl") = infodecal : 
 	"An entity that places a decal on the world. If the decal has no target name, it will immediately apply itself when the level is loaded. "+
 	"If it has a name specified, it won't apply until it receives the 'Activate' input."
 [
@@ -3613,6 +3477,7 @@
 	_lightscaleHDR(float) : "BrightnessScaleHDR" : "1" : "Amount to scale the light by when compiling for HDR."
 	_ambientHDR(color255) : "AmbientHDR" : "-1 -1 -1 1"
 	_AmbientScaleHDR(float) : "AmbientScaleHDR" : "1" : "Amount to scale the ambient light by when compiling for hdr."
+	pitch(integer) : "Pitch" : 0 : "The downward pitch of the light from the sun. 0 is horizontal, -90 is straight down."
 	SunSpreadAngle(float) : "SunSpreadAngle" : 0 : "The angular extent of the sun for casting soft shadows. Higher numbers are more diffuse. 5 is a good starting value."
 	
 	pattern(string) : "Custom Appearance" : "" : "Set a custom pattern of light brightness for this light. Pattern format is a string of characters, where 'a' is total darkness, 'z' fully bright. i.e. 'aaggnnttzz' would be a steppy fade in from dark to light."
@@ -3925,7 +3790,7 @@
 	output OnFullyClosed(void) : "Fired when the water brush reaches the starting position."
 ]
 
-@SolidClass base(Targetname, Parentname, Origin, Angles, RenderFields, Shadow, Reflection) = func_rotating : 
+@SolidClass base(Targetname, Parentname, Origin, Angles, RenderFields, Shadow, ToggleDraw, Reflection) = func_rotating : 
 	"A rotating brush entity."
 [
 	maxspeed(integer) : "Max Rotation Speed" : 100 : "The maximum rotation speed of the brushes, in degrees per second."
@@ -4465,7 +4330,7 @@
 	soundunlockedoverride(sound) : "Unlocked Sound" : : "Sound played when the door is unlocked."
 
 	forceclosed(boolean) : "Force Closed" : 0 : "If set, this door will close no matter what. Useful for doors that have to close even if the player tries to block them with objects."
-	
+
 	spawnflags(flags) =
 	[
 		1 : "Starts Open" : 0
@@ -4514,8 +4379,6 @@
 	input SetGlowEnabled(void) : "Starts the glow."
 	input SetGlowDisabled(void) : "Stops the glow."
 ]
-
-
 //-------------------------------------------------------------------------
 //
 // Cube map sample
@@ -5714,7 +5577,7 @@
 //
 //-------------------------------------------------------------------------
 
-@SolidClass base(BreakableBrush,Targetname, Origin, RenderFields, Shadow, Reflection) = func_physbox : 
+@SolidClass base(BreakableBrush, Origin, RenderFields, Shadow, Reflection, Parentname) = func_physbox : 
 	"A brush entity that's physically simulated."
 [
 	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
@@ -5859,6 +5722,57 @@
 	// Outputs
 	output OnActivate(void) : "Fired when gas starts to escape from the cannister."
 	output OnAwakened(void) : "Fired when this entity becomes awake (collision/force is applied)."
+]
+
+@SolidClass base(BreakableBrush, Origin, BasePropPhysics, RenderFields, Shadow, Reflection, Parentname) = func_pushable : 
+	"A pushable brush object with very primitive physics."
+[
+	_minlight(string) : "Minimum Light Level" : : "The minimum level of ambient light that hits this brush."
+	
+	Damagetype(choices) : "Impact Damage Type" : 0 =
+	[
+		0: "Blunt"
+		1: "Sharp"
+	]
+	
+	massScale(float) : "Mass Scale" : "0" : "A scale multiplier for the object's mass."
+	overridescript(string) : "Override Parameters" : "" : "A list of physics key/value pairs that are usually in a physics prop .qc file. Format is 'key,value,key,value,etc'."
+	damagetoenablemotion(integer) : "Health Level to Override Motion" : 0 : "If specified, this object will start motion disabled. Once its health has dropped below this specified amount, it will enable motion."
+	forcetoenablemotion(float) : "Physics Impact Force to Override Motion" : 0 : "If specified, this object will start motion disabled. Any impact that imparts a force greater than this value on the physbox will enable motion."
+	health(integer) : "Strength" : 0 : "Number of points of damage to take before breaking.  0 means don't break."
+	preferredcarryangles(vector) : "Preferred Player-carry Angles" : "0 0 0" : "If the 'Use Preferred Carry Angles' spawnflag is set, this angle is the angle which the object should orient to when the player picks it up, with the physgun or +USE."
+	notsolid(choices) : "Not solid to world" : 0 =
+	[
+		0: "Solid to World"
+		1: "Passes through World"
+	]
+	
+	ExploitableByPlayer(choices) : "Exploitable by Player" : 0 =
+	[
+		0: "Default"
+		1: "Explosive"
+	]
+
+	// Inputs
+	input Wake(void) : "Wake up this physics object, if it is sleeping."
+	input Sleep(void) : "Put this physics object to sleep. It will wake if given the Wake input, or if force is applied to it. Note that physics objects go to sleep automatically after coming to rest for a while, so you don't really need to use this."
+	input EnableMotion(void) : "Enable physics motion/collision response."
+	input DisableMotion(void) : "Disable physics motion/collision response."
+	input ForceDrop(void) : "If this object is being carried by a player, with the physgun or +USE, force it to be dropped."
+	input Enable(void) : "Show this object and allow it to collide, doesn't override notsolid"
+	input Disable(void) : "Hide this object and stop collisions"
+	input BecomeDebris(void) : "Change the collision to act like debris"
+
+	
+	// Outputs
+	output OnDamaged(void) : "Fired when this entity is damaged."
+	output OnAwakened(void) : "Fired when this entity becomes awake (collision/force is applied)."
+	output OnMotionEnabled(void) : "Fired when motion is enabled due to damage/physcannon/force."
+	output OnPhysGunPickup(void) : "Fired when a player picks this object up, either with the physgun or +USE."
+	output OnPhysGunPunt(void) : "Fired when a player punts this object with the physgun."
+	output OnPhysGunOnlyPickup(void) : "Fired when a player picks this object up WITH THE PHYSGUN. +USE pickups do not fire this output."
+	output OnPhysGunDrop(void) : "Fired when a player drops this object."
+	output OnPlayerUse(void) : "Fired when the player tries to +USE the physbox. This output will fire only if the Generate output on +USE spawnflag is set."
 ]
 
 @PointClass base(Targetname, Parentname) size(-4 -4 -4, 4 4 4) = info_constraint_anchor : 
@@ -6189,6 +6103,9 @@
 	renderamt(integer) : "Alpha" : 255 : "Alpha of the fade, where 0 = fully transparent and 255 = fully opaque." 
 	rendercolor(color255) : "Color (R G B)" : "255 255 255"
 	enablelightbounce(boolean) : "Enable Bounced Lighting" : 0 : "Whether VRAD should create indirect lighting from this prop."
+	preventpropcombine(boolean) : "Disable Prop Combine" : 0 : "Prevent this static prop from combining with any other static props in vbsp."
+	
+	uniformscale(float) : "Uniform Scale Override" : 1 : "Resize the static prop."
 ]
 
 @BaseClass = BaseFadeProp
@@ -6317,6 +6234,7 @@
 	forcetoenablemotion(float) : "Physics Impact Force to Override Motion" : 0 : "If specified, this object will start motion disabled. Any impact that imparts a force greater than this value on the physbox will enable motion."
 	
 	puntsound(sound) : "Sound to make when punted"
+
 	addon(string) : "AI AddOn" : "" : "If specified this object will use this addon behavior when installed in a composite AI"
 
 	// Inputs
@@ -6344,7 +6262,7 @@
 	output OnOutOfWorld(void) : "Fired whenever the prop is out of the allowed world bounds."
 ]
 
-@PointClass base(BasePropPhysics) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics_override :
+@PointClass base(BasePropPhysics, Parentname) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics_override :
 	"A prop that physically simulates as a single rigid body. It can be constrained to other physics objects using hinges "+
 	"or other constraints. It can also be configured to break when it takes enough damage. Health can be overridden on this version."
 [
@@ -6357,7 +6275,7 @@
 	input IgniteHitboxFireScale(float) : "Ignite, with a parameter hitbox fire scale."
 ]
 
-@PointClass base(BasePropPhysics, RenderFields) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics :
+@PointClass base(BasePropPhysics, RenderFields, Parentname, Origin) studioprop() sphere(fademindist) sphere(fademaxdist) = prop_physics :
 	"A prop that physically simulates as a single rigid body. It can be constrained to other physics objects using hinges "+
 	"or other constraints. It can also be configured to break when it takes enough damage. "+
 	"Note that the health of the object will be overridden by the health inside the model, to ensure consistent health game-wide. "+
@@ -6763,7 +6681,7 @@
 	"NOTE: Build your train so that the front of the train is facing down the X axis. " +
 	"When it spawns it will automatically rotate to face the next path_track on the path."
 [
-	
+
 	// Inputs
 	input MoveToPathNode(string) : "Start moving to a destination and stop when you get there. This must be in the same path."
 	input TeleportToPathNode(string) : "Teleport to a destination and stop there. This can be in a new path."
@@ -7057,7 +6975,9 @@
 
 	speed(integer) : "Speed of Push" : 40 : "The speed at which to push entities away, in inches / second."
 	alternateticksfix(float) : "Scale force for alternate ticks" : "0" : "If nonzero, scale the force by this amount when running with alternate ticks. This fixes problems with an overly large force due to the longer frametime on when running with sv_alternateticks 1."
-
+	OnlyFallingPlayers(boolean) : "Only Falling Players" : 0 : "Only affect players if they are falling (and not pressing jump)"
+	FallingSpeedThreshold(float) : "Player fall speed" : "-150" : "Player must be falling this fast for push to happen"
+	
 	// Inputs
 	input SetPushDirection(vector) : "Sets the angles indicating the direction to push touched entities."
 ]
@@ -7117,8 +7037,10 @@
 	"by their initial offset from the landmark, and their angles are left alone."
 [
 	target(target_destination) : "Remote Destination" : : "The entity specifying the point to which entities should be teleported."
-	landmark(target_destination) : "Local Destination Landmark" : : "If specified, then teleported entities are offset from the target by their initial offset from the landmark."
-	UseLandmarkAngles(boolean) : "Use Landmark Angles" : 0 : "Forces the teleported object to snap to the angles of the destination landmark."
+	landmark(target_destination) : "Local Landmark" :  : "If specified, then teleported entities are offset from the target by their initial offset from the landmark.  "+  
+														"Use !activator to use the player's velocity to continue through the teleport.  "+
+														"Use an info_target for a smoother teleporting experince"
+	UseLandmarkAngles(boolean) : "Use Destination Angles" : 0 : "Forces the teleported object to snap to the angles of the destination."
 	CheckDestIfClearForPlayer(boolean) : "Only Spawn-Valid Destinations" : 0 : "Only teleport if there is a clear teleport destination."
 	
 	input SetRemoteDestination(string) : "Set a new target to teleport to."
@@ -7434,12 +7356,20 @@
 	renderamt(integer) : "FX Amount (0 - 255)" : 255 : "The FX amount is used by the selected Render Mode."
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
 
-	rendermode(choices) : "Render Mode" : 5 =
+	rendermode(choices) : "Render Mode" : 5 : "Additive works best.  Normal and solid are opaque.  The rest may have undesirable effects.  " +
+											"Example world space glow will render through walls." =
 	[
 		0: "Normal"
+		1: "Color"
+		2: "Texture"
+		3: "Glow"
 		4: "Solid"
 		5: "Additive"
+		7: "Additive Fractional Frame"
+		9: "World Space Glow"
+		10: "Dont Render"
 	]
+
 	
 	// Inputs
 	input ColorRedValue(float) : "Sets the red color channel's value (0 - 255)."
@@ -7987,20 +7917,12 @@
 		256 : "Aiming Assistance (Player Only)" : 0
 	]
 ]
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////End of base.fgd////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////Start of csgo.fgd//////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
 //====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: Counter-Strike: Source game definition file (.fgd) 
@@ -8031,8 +7953,9 @@
 	input SetTeam(integer) : "Changes the entity's team"
 ]
 
-@BaseClass color(255 255 255) base(Targetname, RenderFields, Angles) = Weapon
+@BaseClass color(0 0 200) base(Targetname, RenderFields, Angles) = Weapon
 [
+	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
 	spawnflags(Flags) =
 	[
 		1 : "Start constrained" : 0
@@ -8041,6 +7964,13 @@
 
 	output OnPlayerUse(void) : "Fires when the player +uses this weapon"
 	output OnPlayerPickup(void) : "Fires when the player picks up this weapon"
+	output OnIgnite(void) : "Fired when the weapon catches fire."
+	//output OnNPCPickup(void) : "Fired when an NPC picks up the weapon."
+	
+	input SetReserveAmmoAmount(integer) : "Set the reserve ammo on this weapon"
+	input SetAmmoAmount(integer) : "Set the ammo on this weapon"
+	input ToggleCanBePickedUp(void) : "Toggle CanBePickedUp"
+	input Ignite(void) : "Sets the weapon afire."
 ]
 
 @FilterClass base(BaseFilter) size(-8 -8 -8, 8 8 8) = filter_activator_team :
@@ -8443,6 +8373,7 @@
 // Weapons
 //
 //-------------------------------------------------------------------------
+<<<<<<< HEAD
 @BaseClass base(Targetname, Angles, Parentname, RenderFields) color(255 255 255) = Weapon
 [
 	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
@@ -8464,10 +8395,13 @@
 	input Ignite(void) : "Sets the weapon afire."
 ]
 
+=======
+>>>>>>> origin/master
 
 @PointClass base(Weapon) studio("models/weapons/w_rif_ak47_dropped.mdl") = weapon_ak47 : "AK-47" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_aug_dropped.mdl") = weapon_aug : "AUG" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_awp_dropped.mdl") = weapon_awp : "AWP" []
+@PointClass base(Weapon) studio("models/weapons/w_eq_charge.mdl") = weapon_breachcharge : "Breach Charge" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_bizon_dropped.mdl") = weapon_bizon : "PP-Bizon" []
 @PointClass base(Weapon) studio("models/weapons/w_pist_cz_75_dropped.mdl") = weapon_cz75a : "CZ75a" []
 @PointClass base(Weapon) studio("models/weapons/w_pist_deagle_dropped.mdl") = weapon_deagle : "Desert Eagle" []
@@ -8483,12 +8417,16 @@
 @PointClass base(Weapon) studio("models/weapons/w_pist_hkp2000_dropped.mdl") = weapon_hkp2000 : "P2000" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_incendiarygrenade_dropped.mdl") = weapon_incgrenade : "Incendiary Grenade" []
 @PointClass base(Weapon) studio("models/weapons/w_knife.mdl") = weapon_knife : "Knife" []
+@PointClass base(Weapon) studio("models/weapons/w_axe.mdl") = weapon_axe : "Axe" []
+@PointClass base(Weapon) studio("models/weapons/w_hammer.mdl") = weapon_hammer : "Hammer" []
+@PointClass base(Weapon) studio("models/weapons/w_spanner.mdl") = weapon_spanner : "Wrench" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_m4a1_dropped.mdl") = weapon_m4a1 : "M4A4" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_m4a1_s_dropped.mdl") = weapon_m4a1_silencer : "M4A1 Silenced" []
 @PointClass base(Weapon) studio("models/weapons/w_mach_m249_dropped.mdl") = weapon_m249 : "M249 Para" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_mac10_dropped.mdl") = weapon_mac10 : "MAC-10" []
 @PointClass base(Weapon) studio("models/weapons/w_shot_mag7_dropped.mdl") = weapon_mag7 : "MAG-7" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_molotov_dropped.mdl") = weapon_molotov : "Molotov" []
+@PointClass base(Weapon) studio("models/weapons/w_smg_mp5sd_dropped.mdl") = weapon_mp5sd : "MP5-SD" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_mp7_dropped.mdl") = weapon_mp7 : "MP7" []
 @PointClass base(Weapon) studio("models/weapons/w_smg_mp9_dropped.mdl") = weapon_mp9 : "MP9" []
 @PointClass base(Weapon) studio("models/weapons/w_mach_negev_dropped.mdl") = weapon_negev : "Negev" []
@@ -8508,10 +8446,9 @@
 @PointClass base(Weapon) studio("models/weapons/w_eq_taser.mdl") = weapon_taser : "weapon_taser" []
 @PointClass base(Weapon) studio("models/weapons/w_defuser.mdl") = item_defuser : "Defuse Kit" []
 @PointClass base(Weapon) studio("models/weapons/w_c4_planted.mdl") = weapon_c4 : "C4 Bomb" []
-
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
-@PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles" 
+@PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles"
 [
   skin(float) : "skin" : "0" : "skin of the nightvision goggles"
   bodygroup(float) : "Bodygroup" : "0" : "The skin group of the nightvision goggles"
@@ -8608,6 +8545,8 @@
 	"A single Buy Zone entity must be either terrorist or counter-terrorist, it cannot be both. Should have " +
 	"the toolstrigger material applied to all sides"
 [
+	input SetEnabled(void) : "Sets this buyzone as enabled."
+	input SetDisabled(void) : "Sets this buyzone as disabled."
 	input SetTeam_TerroristOnly(void) : "Make it so only terrorist can buy from this buyzone."
 	input SetTeam_CTOnly(void) : "Make it so only CT's can buy from this buyzone."
 	input SetTeam_AllTeams(void) : "Make it so all teams can buy from this buyzone."
@@ -8705,6 +8644,10 @@
 
 ]
 
+@PointClass base(Targetname) iconsprite("editor/gibshooter.vmt") = info_gascanister_launchpoint : 
+	"The position a gas canister will launch from in Survival Mode." 
+[
+]
 
 @PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = point_territory_control_rules
 	: "The Territory Control rules entity (VERY IMPORTANT!)"
@@ -8756,6 +8699,10 @@
 	input AddTeamMoneyTerrorist(void) : "Add money to players on team TERRORIST."
 	input AddTeamMoneyCT(void) : "Add money to players on team COUNTER TERRORIST."
 	input AddMoneyPlayer(void) : "Add money directly to the player activating this entity. (no chat description)"
+	input SpendMoneyFromPlayer(void) : "If the player has [money amount] or more, take [money amount] away."
+	
+	output OnMoneySpent(void) : "Fires when input SpendMoneyFromPlayer succeeded."
+	output OnMoneySpentFail(void) : "Fires when input SpendMoneyFromPlayer failed. (Player didn't have enough money)"
 ]
 
 //-------------------------------------------------------------------------
@@ -8823,6 +8770,15 @@
 
 ]
 
+
+@PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = game_survival_logic : 
+	"An entity that will fire outputs when events happen during Survival mode." 
+[
+	// Outputs
+	output OnZoneRocketWarning(void) : "Fired when the warning sound plays that announcing incoming rockets"
+	output OnZoneRocketStartLaunch(void) : "Fired when the barrage of rockets start launching (after the announce)"
+	output OnZoneEndGameStart(void) : "Fired when the end game starts and no more rockets will fire, but the zones start shrinking"
+]
 
 @PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = game_coopmission_manager : 
 	"An entity that keeps track of the coop wave/phase and fires outputs when players complete them." 
@@ -8911,6 +8867,7 @@
 		"weapon_negev" : "Negev"
 		"weapon_sawedoff" : "Sawedoff"
 		"weapon_tec9" : "Tec9"
+		"weapon_mp5sd" : "Mp5sd"
 		"weapon_mp7" : "Mp7"
 		"weapon_mp9" : "Mp9"
 		"weapon_nova" : "Nova"
@@ -8984,7 +8941,100 @@
 ]
 
 
+@PointClass base(Targetname, Angles) studio("models/props_survival/cases/case_heavy_weapon.mdl") = point_dz_weaponspawn :
+	"Survival weapon spawn point.\n"
+[
+	groupID(integer) : "Group ID" : 0 : "When an item spawns in a spawn point, other nearby spawn points with the same ID will have less chance of spawning an item."
+	default_weight(float) : "Default Weight" : 100 : "Weight used to distribute item"
+	door_name(string) : "Door Name" : "" : "This point is behind a specific door"
+]
 
+@PointClass base(Targetname) sphere() = point_dz_weaponspawn_group : 
+	"Survival weapon spawn grouping.\n"
+[
+	radius(integer) : "Radius" : 512
+]
+
+@SolidClass base(Trigger) = trigger_survival_playarea : 
+	"A trigger volume that defines the bounds of the survival play area."
+[
+]
+
+@SolidClass base(Trigger) = trigger_survival_maproom : 
+	"A trigger volume that encompasses the survival map room."
+[
+]
+
+@SolidClass base(Trigger) = trigger_survival_maproom_table : 
+	"A trigger volume that defines the top of the survival map room minimap table."
+[
+]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/dronegun/dronegun.mdl") = point_dz_dronegun :
+	"DroneGun Emplacement\n"
+[
+	spawnAutomatically(choices) : "Spawn Automatically?" : 1 : "Dronegun always spawns on game start, no input required." =
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	input spawn(void) : "Input to spawn the dronegun."
+]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/upgrades/parachutepack.mdl") = point_dz_parachute :
+	"Parachute Backpack\n"
+[
+]
+
+@PointClass base(PropDoorRotating, DamageFilter) studioprop() = dz_door : "Survival Door"
+[
+	is_security_door(boolean) : "Security door" : 0 : "This is a security door"
+]
+
+@PointClass base(Targetname, Parentname, Angles) studio("models/props_survival/counter/counter_a.mdl") = prop_counter :
+	"Numerical Display Counter\n"
+[
+	initialValue(integer) : "Initial Value" : 0
+]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/safe/safe.mdl") sphere(radius) = func_survival_c4_target : 
+	"A brush entity that can be broken by c4 within specific radius in survival mode." 
+[
+	radius(float) : "Radius" : 350 : "C4 must be planted within this radius to destroy this entity"
+]
+
+@SolidClass base(Targetname, Parentname ) = func_tablet_blocker:  
+	"Disable the tablet for players within this region."
+[
+]
+
+@PointClass sphere(radius) = info_map_region: 
+	"Point entity for setting the name of a map region for display." 
+[
+	radius(float) : "Radius" : 1200 : "The area of the map witin this sphere will be named according to this entity."
+	token(string) : "Name Token" : "" : "Localization token for this region's name."
+]
+
+@PointClass base(Targetname, Angles, Parentname) studio("models/editor/axis_helper_thick.mdl") = vgui_world_text_panel : 
+	"A VGUI world panel that can be placed and modified by entity logic and display localized text"
+[
+	enabled(boolean) : "Enabled by default?" : 1
+
+	displaytext(string) : "Display Text" : "" : "The default text to display"
+	displaytextoption(string) : "Display Text Option" : "" : "Text that will be inserted in the place of a %s1 if you token has one - if you don't know what that is, don't use this"
+	font(string) : "Font" : "DefaultLarge" : "The font that will be used (should match an entry in your Scheme.res file)"
+
+	width(integer) : "Panel width" : 256 : "Width of the panel in units."
+	height(integer) : "Panel height" : 128 : "Height of the panel in units."
+	textpanelwidth(integer) : "Text Panel Width" : 256 : "Sometimes the text panel needs to be smaller to force a wrap, but keep the same font size."
+
+	textcolor(color255) : "Text Color (R G B)" : "255 255 255" : "The color of the text."
+
+	input Enable(void) : "Make text visible."
+	input Disable(void) : "Make text invisible."
+
+	input SetDisplayText(string) : "Sets the display text."
+]
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////End of csgo.fgd////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
