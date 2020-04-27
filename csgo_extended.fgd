@@ -80,11 +80,8 @@
 	skin(integer) : "Skin" : 0 : "Some models have multiple versions of their textures, called skins. Set this to a number other than 0 to use that skin instead of the default."
 	body(integer) : "Body" : 0 : "Some models have multiple bodygroups. Set this to a number other than 0 to use that bodygroup instead of the default."
 
-	disableshadows(choices) : "Disable Shadows" : 0 : "Used to disable dynamic shadows on this entity." =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+	disableshadows(boolean) : "Disable Shadows" : 0 : "Used to disable dynamic shadows on this entity." 
+
 	
 	// Inputs
 	input Skin(integer) : "Changes the model skin to the specified number."
@@ -225,11 +222,8 @@
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
 	_minlight(string) : "Minimum light level" : "0.0" : "Minimum amount of light with which to light this brush.  0 means pitch black; 2 means fullbright."
 
-		disableshadows(choices) : "Disable shadows" : 0 : "Prevent this entity from casting shadows." =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+		disableshadows(boolean) : "Disable shadows" : 0 : "Prevent this entity from casting shadows." 
+
 	disablereceiveshadows(choices) : "Disable Receiving Shadows" : 0 =
 	[
 		0 : "No"
@@ -6080,11 +6074,8 @@
 		2: "Use Bounding Box"
 		6: "Use VPhysics"
 	]
-	disableshadows(choices) : "Disable Shadows" : 0 =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+	disableshadows(boolean) : "Disable Shadows" : 0 
+
 	
 	screenspacefade(boolean) : "Screen Space Fade" : 0 : "The method by which the fading distance should be determined. If 'No', the fade distances is the distance from the player's view to the object, in inches. If 'Yes', the fade distance is the size of the object onscreen, in pixels."
 
