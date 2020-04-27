@@ -2507,6 +2507,12 @@
 		"": "No"
 		1: "Yes"
 	]
+
+	weapon_knife_ghost (choices) : "Give Ghost Knife" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
 	
 	weapon_axe (choices) : "Give Axe" : "" = 
 	[
@@ -2740,8 +2746,10 @@
 	weapon_tagrenade (float) : "Give # Tactical Awareness Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_healthshot (float) : "Give # Healthshot" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_decoy (float) : "Give # Decoy Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_diversion (float) : "Give # Diversion Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_molotov (float) : "Give # Molotov Cocktail" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_incgrenade (float) : "Give # Incendiary Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_snowball (float) : "Give # snowballs" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	
 	weapon_taser (choices) : "Give Taser" : "" =
 	[
@@ -8415,6 +8423,9 @@
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
 @PointClass base(Weapon) studio("models/props_survival/repulsor/repulsor.mdl") = weapon_zone_repulsor : "Zone Repulsor Device" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_fists.mdl") = weapon_fists : "Fisty cups" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_snowball_dropped.mdl") = weapon_snowball : "Snowballs" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_decoy_dropped.mdl") = weapon_diversion : "Diversion grenade" []
 @PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles"
 [
   skin(float) : "skin" : "0" : "skin of the nightvision goggles"
