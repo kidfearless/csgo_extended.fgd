@@ -9111,7 +9111,9 @@
 	"One time use armor activating on touch."
 [
 ]
-
+@PointClass base(prop_physics_multiplayer) studioprop("models\props_survival\upgrades\upgrade_dz_helmet.mdl") = prop_weapon_upgrade_helmet : "When touched, gives a player a helmet and 5 armor. Can only be used in danger zone (otherwise it crashes the game)."
+[
+]
 @PointClass base(Targetname, Parentname) studio("models/props_survival/upgrades/upgrade_heavy_armor.mdl") = prop_weapon_refill_heavyarmor:
 	"One time heavy armor refill activating with long use."
 [
