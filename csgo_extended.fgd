@@ -80,11 +80,8 @@
 	skin(integer) : "Skin" : 0 : "Some models have multiple versions of their textures, called skins. Set this to a number other than 0 to use that skin instead of the default."
 	body(integer) : "Body" : 0 : "Some models have multiple bodygroups. Set this to a number other than 0 to use that bodygroup instead of the default."
 
-	disableshadows(choices) : "Disable Shadows" : 0 : "Used to disable dynamic shadows on this entity." =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+	disableshadows(boolean) : "Disable Shadows" : 0 : "Used to disable dynamic shadows on this entity." 
+
 	
 	// Inputs
 	input Skin(integer) : "Changes the model skin to the specified number."
@@ -225,11 +222,8 @@
 	rendercolor(color255) : "FX Color (R G B)" : "255 255 255" : "The FX color is used by the selected Render Mode."
 	_minlight(string) : "Minimum light level" : "0.0" : "Minimum amount of light with which to light this brush.  0 means pitch black; 2 means fullbright."
 
-		disableshadows(choices) : "Disable shadows" : 0 : "Prevent this entity from casting shadows." =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+		disableshadows(boolean) : "Disable shadows" : 0 : "Prevent this entity from casting shadows." 
+
 	disablereceiveshadows(choices) : "Disable Receiving Shadows" : 0 =
 	[
 		0 : "No"
@@ -2513,6 +2507,12 @@
 		"": "No"
 		1: "Yes"
 	]
+
+	weapon_knife_ghost (choices) : "Give Ghost Knife" : "" = 
+	[
+		"": "No"
+		1: "Yes"
+	]
 	
 	weapon_axe (choices) : "Give Axe" : "" = 
 	[
@@ -2746,8 +2746,10 @@
 	weapon_tagrenade (float) : "Give # Tactical Awareness Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_healthshot (float) : "Give # Healthshot" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_decoy (float) : "Give # Decoy Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_diversion (float) : "Give # Diversion Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_molotov (float) : "Give # Molotov Cocktail" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	weapon_incgrenade (float) : "Give # Incendiary Grenade" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
+	weapon_snowball (float) : "Give # snowballs" : "" : "Placing a 0 or 1 in this field will give you 1 of the item"
 	
 	weapon_taser (choices) : "Give Taser" : "" =
 	[
@@ -6080,11 +6082,8 @@
 		2: "Use Bounding Box"
 		6: "Use VPhysics"
 	]
-	disableshadows(choices) : "Disable Shadows" : 0 =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
+	disableshadows(boolean) : "Disable Shadows" : 0 
+
 	
 	screenspacefade(boolean) : "Screen Space Fade" : 0 : "The method by which the fading distance should be determined. If 'No', the fade distances is the distance from the player's view to the object, in inches. If 'Yes', the fade distance is the size of the object onscreen, in pixels."
 
@@ -8373,31 +8372,6 @@
 // Weapons
 //
 //-------------------------------------------------------------------------
-<<<<<<< HEAD
-@BaseClass base(Targetname, Angles, Parentname, RenderFields) color(255 255 255) = Weapon
-[
-	ammo(integer) : "Ammo" : 0 : "Number of bullets this entity has in addition to the default clip.  (Ignored on the knife, obviously.)"
-	CanBePickedUp(choices) : "Is this weapon allowed to be picked up?" : 1 : "Whether or not the weapon can be picked up" =
-	[
-		0 : "No"
-		1 : "Yes"
-	]
-	spawnflags(Flags) =
-	[
-		1 : "Start asleep (don't fall to ground)" : 0
-	]
-
-	output OnPlayerUse(void) : "Fired when the player +USEs the weapon."
-	output OnPlayerPickup(void) : "Fires when the player picks up this weapon"
-	output OnIgnite(void) : "Fired when the weapon catches fire."
-	// output OnNPCPickup(void) : "Fired when an NPC picks up the weapon."
-
-	input Ignite(void) : "Sets the weapon afire."
-]
-
-=======
->>>>>>> origin/master
-
 @PointClass base(Weapon) studio("models/weapons/w_rif_ak47_dropped.mdl") = weapon_ak47 : "AK-47" []
 @PointClass base(Weapon) studio("models/weapons/w_rif_aug_dropped.mdl") = weapon_aug : "AUG" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_awp_dropped.mdl") = weapon_awp : "AWP" []
@@ -8448,6 +8422,10 @@
 @PointClass base(Weapon) studio("models/weapons/w_c4_planted.mdl") = weapon_c4 : "C4 Bomb" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_healthshot_dropped.mdl") = weapon_healthshot : "Medi-Shot" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scar20_dropped.mdl") = weapon_scar20 : "Scar20" []
+@PointClass base(Weapon) studio("models/props_survival/repulsor/repulsor.mdl") = weapon_zone_repulsor : "Zone Repulsor Device" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_fists.mdl") = weapon_fists : "Fisty cups" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_snowball_dropped.mdl") = weapon_snowball : "Snowballs" []
+@PointClass base(Weapon) Studio("models/weapons/w_eq_decoy_dropped.mdl") = weapon_diversion : "Diversion grenade" []
 @PointClass base(Weapon) Studio("models/weapons/w_eq_multimeter.mdl") = item_nvgs : "Night Vision goggles"
 [
   skin(float) : "skin" : "0" : "skin of the nightvision goggles"
@@ -8955,6 +8933,13 @@
 	radius(integer) : "Radius" : 512
 ]
 
+@PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = dangerzone_controller
+	: "Danger Zone Controller entity for mission-driven bomb explosions"
+[
+	dz_enabled(boolean) : "Enabled" : 1 : "Must be enabled when placed in the map"
+	dz_suppressbombalert(boolean) : "Suppress Bomb Alert" : 1 : "Disable if you need to generate alerts for players to activate their tablets"
+	dz_missioncontrolled(boolean) : "Mission Controls Explosions" : 1 : "Must be enabled for mission scripting flow to control explosions"
+]
 @SolidClass base(Trigger) = trigger_survival_playarea : 
 	"A trigger volume that defines the bounds of the survival play area."
 [
@@ -8997,23 +8982,6 @@
 	initialValue(integer) : "Initial Value" : 0
 ]
 
-@PointClass base(Targetname, Angles) studio("models/props_survival/safe/safe.mdl") sphere(radius) = func_survival_c4_target : 
-	"A brush entity that can be broken by c4 within specific radius in survival mode." 
-[
-	radius(float) : "Radius" : 350 : "C4 must be planted within this radius to destroy this entity"
-]
-
-@SolidClass base(Targetname, Parentname ) = func_tablet_blocker:  
-	"Disable the tablet for players within this region."
-[
-]
-
-@PointClass sphere(radius) = info_map_region: 
-	"Point entity for setting the name of a map region for display." 
-[
-	radius(float) : "Radius" : 1200 : "The area of the map witin this sphere will be named according to this entity."
-	token(string) : "Name Token" : "" : "Localization token for this region's name."
-]
 
 @PointClass base(Targetname, Angles, Parentname) studio("models/editor/axis_helper_thick.mdl") = vgui_world_text_panel : 
 	"A VGUI world panel that can be placed and modified by entity logic and display localized text"
@@ -9035,6 +9003,25 @@
 
 	input SetDisplayText(string) : "Sets the display text."
 ]
+
+@PointClass base(Targetname, Angles) studio("models/props_survival/safe/safe.mdl") sphere(radius) = func_survival_c4_target : 
+	"A brush entity that can be broken by c4 within specific radius in survival mode." 
+[
+	radius(float) : "Radius" : 350 : "C4 must be planted within this radius to destroy this entity"
+]
+
+@SolidClass base(Targetname, Parentname ) = func_tablet_blocker:  
+	"Disable the tablet for players within this region."
+[
+]
+
+@PointClass sphere(radius) = info_map_region: 
+	"Point entity for setting the name of a map region for display." 
+[
+	radius(float) : "Radius" : 1200 : "The area of the map witin this sphere will be named according to this entity."
+	token(string) : "Name Token" : "" : "Localization token for this region's name."
+]
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////End of csgo.fgd////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -9106,7 +9093,85 @@
 	input ModifySpeed(float) : "Modifies player speed by X ammount."
 ]
 
+@PointClass sphere(radius) = info_paradrop_denial: 
+	"Danger Zone paradrops will avoid this volume." 
+						
+[
+	radius(float) : "Radius" : 128 : "Area of denial radius"
+]
+@PointClass base(Targetname, Parentname) studio("models/props_survival/crates/crate_ammobox.mdl") = prop_ammo_box_generic :
+	"Sharable ammo box."
+[
+	spawnflags(Flags) =
+	[
+		1 : "Start constrained" : 0
+	]
+]
+@PointClass base(Targetname, Parentname) studio("models/props_survival/upgrades/upgrade_dz_armor.mdl") = prop_weapon_upgrade_armor:
+	"One time use armor activating on touch."
+[
+]
 
+@PointClass base(Targetname, Parentname) studio("models/props_survival/upgrades/upgrade_heavy_armor.mdl") = prop_weapon_refill_heavyarmor:
+	"One time heavy armor refill activating with long use."
+[
+	skin(integer) : "Skin" : 0 : "Some models have multiple versions of their textures, called skins. Set this to a number other than 0 to use that skin instead of the default."
+	body(integer) : "Body" : 0 : "Some models have multiple bodygroups. Set this to a number other than 0 to use that bodygroup instead of the default."
+]
+
+@PointClass base(Targetname, Parentname, Angles) studio() = prop_mapplaced_long_use_entity:
+	"A map placed entity which activates with long use."
+[
+	model(studio) report : "World Model"
+	skin(integer) : "Skin" : 0 : "Some models have multiple versions of their textures, called skins. Set this to a number other than 0 to use that skin instead of the default."
+	body(integer) : "Body" : 0 : "Some models have multiple bodygroups. Set this to a number other than 0 to use that bodygroup instead of the default."
+	sequence(integer) : "Sequence" : 0 : "Default animation sequence for the model to be playing after spawning."
+	// Long Use Configuration
+	pingtype(choices) : "Ping Type (int)" : 0 =
+ 
+	[
+		0 : "Default"
+		3 : "Item"
+		4 : "Danger"
+		5 : "Helmet"
+		6 : "Armor"
+		7 : "Armor and Helmet"
+		8 : "Ammunition"
+		9 : "Radar Jammer"
+		10 : "ExoJump"
+		11 : "Parachute"
+		12 : "Contract"
+		13 : "Tablet Upgrade"
+		14 : "Money"
+	]
+
+	longuseactiontype(choices) : "Use Type (int)" : 0 =
+	[
+		0 : "Disabled"
+		1 : "Defusing"
+		2 : "Defusing with Kit"
+		3 : "Hostage Pickup"
+		4 : "Hostage Drop-off"
+		5 : "Opening Safe"
+		6 : "Equipping Parachute"
+		7 : "Equipping Heavy Armor"
+		8 : "Equipping Contract"
+		9 : "Equipping Tablet Upgrade"
+		10 : "Taking off Heavy Armor"
+		11 : "Paying to Open Door"
+		12 : "Letting go of rope"
+		13 : "Equipping ExoJump"
+		14 : "Picking up Bump Mine"
+		15 : "Picking up Item"
+	]
+
+	longuseduration(float) : "Use Duration (float)" : 0 : "How long the player must use this item until pickup, must be positive"
+
+	soundstartuse(string) : "Sound name" : "" : "Name of sound script empty to play when use begins, e.g. Player.PickupWeapon" 
+
+	// Outputs
+	output OnUseCompleted(void) : "Fired when a player finishes the long use."										  
+]
 @PointClass base(Targetname, Parentname, Angles, RenderFields) studio("models/chicken/chicken.mdl") = chicken :
     "Chicken AI entity."
 [
@@ -9163,8 +9228,6 @@
 	output OnTakeDamage(void) : "On take damage"
     
 ]
-
-
 @PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = player_weaponstrip : "Strips player's weapons"
 [
 	// Inputs
@@ -9267,7 +9330,8 @@
 	output OnEndTouchAll(void) :	"Fires when an entity stops touching this trigger, " +
 					"and no other entities are touching it. Only entities " +
 					"that passed this trigger's filters are considered."
-]@SolidClass base(Targetname, Parentname, Global, EnableDisable) = trigger_brush
+]
+@SolidClass base(Targetname, Parentname, Global, EnableDisable) = trigger_brush
 [
 	spawnflags(flags) =
 	[
