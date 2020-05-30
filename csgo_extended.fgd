@@ -8436,6 +8436,7 @@
   output OnPlayerTouch(void)
   output OnIgnite(void)
 ]
+@PointClass base(Targetname, Parentname, Angles) Studio("models/props_survival/cash/prop_cash_stack.mdl") = item_cash : "Cash pickup ($50)" []
 
 //-------------------------------------------------------------------------
 // Spawnable grenades for the training map
