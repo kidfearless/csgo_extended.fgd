@@ -8436,7 +8436,14 @@
   output OnPlayerTouch(void)
   output OnIgnite(void)
 ]
-@PointClass base(Targetname, Parentname, Angles) Studio("models/props_survival/cash/prop_cash_stack.mdl") = item_cash : "Cash pickup ($50)" []
+@PointClass base(Targetname, Parentname, Angles) studio("models/props_survival/cash/prop_cash_stack.mdl") = item_cash : "Cash pickup ($50)"
+[
+	spawnflags(flags) =
+	[
+		1 : "Constrained" : 0
+	]
+	output OnPlayerTouch(void) : "Fires when a player touches this item. Does not fire if picked up with +use."
+]
 
 //-------------------------------------------------------------------------
 // Spawnable grenades for the training map
