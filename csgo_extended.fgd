@@ -2774,18 +2774,6 @@
 		"": "No"
 		1: "Yes"
 	]
-	
-	prop_weapon_upgrade_armor (choices) : "Give Prop Armor" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
-
-	prop_weapon_upgrade_helmet (choices) : "Give Prop Helmet" : "" = 
-	[
-		"": "No"
-		1: "Yes"
-	]
 
 	weapon_c4 (choices) : "Give C4" : "" = 
 	[
